@@ -19,11 +19,16 @@ dependencies:
 
   # State management
   get: ^4.6.5
+  get_storage: ^2.1.1
 
   # Utility Packages
-  http: ^1.1.0
-  intl: ^0.18.1
-  flutter_native_splash: ^2.3.2
+  http: ^1.1.8
+  intl: ^0.20.2
+  logger: ^2.0.1
+  url_launcher: ^6.2.12
+  flutter_native_splash: ^2.4.4
+  smooth_page_indicator: ^1.2.0
+  carousel_slider: ^5.0.0
 
 #------------------ PACKAGES END ------------------#
 
