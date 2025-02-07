@@ -10,15 +10,9 @@ class BLBTexts {
 
   // -- OnBoarding Texts
   static const String onBoardingTitle1 = "Find a suitable Item";
-  static const String onBoardingTitle2 = "Select Payment Method";
-  static const String onBoardingTitle3 = "Deliver at your door step";
 
   static const String onBoardingSubTitle1 =
       "Welcome to the World of Borrowing, Lending, and Bartering";
-  static const String onBoardingSubTitle2 =
-      "For Seamless Transactions, Choose Your Payment Path - Your Convenience, Our Priority!";
-  static const String onBoardingSubTitle3 =
-      "From Our Doorstep to Yours - Swift, Secure, and Contactless Delivery!";
 
   // -- Authentication Forms
   static const String firstName = "First Name";
