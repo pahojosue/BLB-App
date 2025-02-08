@@ -9,10 +9,16 @@ class BLBTexts {
   static const String tContinue = "Continue";
 
   // -- OnBoarding Texts
-  static const String onBoardingTitle1 = "Find a suitable Item";
+  static const String onBoardingTitle1 = "Welcome to the BLB App";
+  static const String onBoardingTitle2 = "Promoting Sharing";
+  static const String onBoardingTitle3 = "Item reusage is the key";
 
   static const String onBoardingSubTitle1 =
-      "Welcome to the World of Borrowing, Lending, and Bartering";
+      "Easily find items you need without buying them";
+  static const String onBoardingSubTitle2 =
+      "Share your unused items with others";
+  static const String onBoardingSubTitle3 =
+      "Trade items you no longer need for something new";
 
   // -- Authentication Forms
   static const String firstName = "First Name";

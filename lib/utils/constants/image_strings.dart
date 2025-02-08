@@ -60,11 +60,11 @@ class BLBImages {
 
   // -- OnBoarding Texts
   static const String onBoardingImage1 =
-      "assets/images/on_boarding_images/sammy-line-searching.gif";
+      "assets/images/on_boarding_images/blb.jpg";
   static const String onBoardingImage2 =
-      "assets/images/on_boarding_images/sammy-line-shopping.gif";
+      "assets/images/on_boarding_images/blb.jpg";
   static const String onBoardingImage3 =
-      "assets/images/on_boarding_images/sammy-line-delivery.gif";
+      "assets/images/on_boarding_images/blb.jpg";
 
   // -- Products
   static const String productImage1 = "assets/images/products/nike-shoes.png";
