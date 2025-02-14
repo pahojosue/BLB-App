@@ -45,7 +45,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/on_boarding_images/
-    - assets/images/on_boarding_images/Mario.png
     - assets/logos/
+    - assets/images/animations/
   
   #---------------- LOCAL FONTS --------------------#

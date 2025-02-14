@@ -1,7 +1,8 @@
 import 'package:blb/common/styles/spacing_styles.dart';
 import 'package:blb/common/widgets/custom_shapes/containers/primary_header_container.dart';
-import 'package:blb/features/authentication/screens/onboarding/onboarding.dart';
+import 'package:blb/features/authentication/screens/password_configuration/forgot_password.dart';
 import 'package:blb/features/authentication/screens/signup/widgets/signup.dart';
+import 'package:blb/navigation_menu.dart';
 import 'package:blb/utils/constants/colors.dart';
 import 'package:blb/utils/constants/image_strings.dart';
 import 'package:blb/utils/constants/sizes.dart';
@@ -103,10 +104,11 @@ class LoginScreen extends StatelessWidget {
                               ),
                               //Forget Password
                               TextButton(
-                                onPressed: () {},
+                                onPressed: () =>
+                                    Get.to(() => const ForgotPassword()),
                                 // style: TextButton.styleFrom(
                                 //     textStyle: TextStyle(fontSize: BLBSizes.md)),
-                                child: const Text("Recover Password"),
+                                child: const Text("Forgot Password"),
                               ),
                             ],
                           ),
@@ -118,7 +120,8 @@ class LoginScreen extends StatelessWidget {
                           SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () =>
+                                      Get.to(() => const NavigationMenu()),
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor:
                                           Color.fromRGBO(53, 237, 237, 1),
@@ -222,7 +225,7 @@ class LoginScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextButton(
-                        onPressed: () => Get.offAll(OnboardingScreen()),
+                        onPressed: () => Get.to(() => NavigationMenu()),
                         child: Text(
                           "Skip for now",
                           style: TextStyle(

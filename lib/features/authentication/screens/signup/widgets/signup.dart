@@ -1,6 +1,7 @@
 import 'package:blb/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:blb/features/authentication/screens/login/login.dart';
-import 'package:blb/features/authentication/screens/onboarding/onboarding.dart';
+import 'package:blb/features/authentication/screens/signup/widgets/verify_email.dart';
+import 'package:blb/navigation_menu.dart';
 import 'package:blb/utils/constants/colors.dart';
 import 'package:blb/utils/constants/image_strings.dart';
 import 'package:blb/utils/constants/sizes.dart';
@@ -67,62 +68,132 @@ class SignUpScreen extends StatelessWidget {
                   //Form
                   Form(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         //First and Last Name
                         //First Name
-                        TextFormField(
-                          decoration: const InputDecoration(
-                              labelText: BLBTexts.firstName,
-                              prefixIcon: Icon(Iconsax.user)),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 40,
+                              child: Icon(Iconsax.user),
+                            ),
+                            Expanded(
+                              child: TextFormField(
+                                decoration: const InputDecoration(
+                                    labelText: BLBTexts.firstName),
+                              ),
+                            ),
+                          ],
                         ),
                         const SizedBox(height: BLBSizes.spaceBtwInputFields),
                         //Last Name
-                        TextFormField(
-                          decoration: const InputDecoration(
-                              labelText: BLBTexts.lastName,
-                              prefixIcon: Icon(Iconsax.user)),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 40,
+                              child: Icon(Iconsax.user),
+                            ),
+                            Expanded(
+                              child: TextFormField(
+                                decoration: const InputDecoration(
+                                    labelText: BLBTexts.lastName),
+                              ),
+                            ),
+                          ],
                         ),
                         const SizedBox(height: BLBSizes.spaceBtwInputFields),
 
                         ///Username
-                        TextFormField(
-                          decoration: const InputDecoration(
-                              labelText: BLBTexts.username,
-                              prefixIcon: Icon(Iconsax.user_edit)),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 40,
+                              child: Icon(Iconsax.user_edit),
+                            ),
+                            Expanded(
+                              child: TextFormField(
+                                decoration: const InputDecoration(
+                                    labelText: BLBTexts.username),
+                              ),
+                            ),
+                          ],
                         ),
                         const SizedBox(height: BLBSizes.spaceBtwInputFields),
 
                         ///Email
-                        TextFormField(
-                          decoration: const InputDecoration(
-                              labelText: BLBTexts.email,
-                              prefixIcon: Icon(Iconsax.direct)),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 40,
+                              child: Icon(Iconsax.direct),
+                            ),
+                            Expanded(
+                              child: TextFormField(
+                                decoration: const InputDecoration(
+                                    labelText: BLBTexts.email),
+                              ),
+                            ),
+                          ],
                         ),
                         const SizedBox(height: BLBSizes.spaceBtwInputFields),
 
                         ///Password
-                        TextFormField(
-                          obscureText: true,
-                          decoration: const InputDecoration(
-                              labelText: BLBTexts.password,
-                              prefixIcon: Icon(Iconsax.password_check)),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 40,
+                              child: Icon(Iconsax.password_check),
+                            ),
+                            Expanded(
+                              child: TextFormField(
+                                obscureText: true,
+                                decoration: const InputDecoration(
+                                    labelText: BLBTexts.password),
+                              ),
+                            ),
+                          ],
                         ),
                         const SizedBox(height: BLBSizes.spaceBtwInputFields),
 
                         ///Phone Number
-                        TextFormField(
-                          decoration: const InputDecoration(
-                              labelText: BLBTexts.phoneNo,
-                              prefixIcon: Icon(Iconsax.call)),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 40,
+                              child: Icon(Iconsax.call),
+                            ),
+                            Expanded(
+                              child: TextFormField(
+                                decoration: const InputDecoration(
+                                    labelText: BLBTexts.phoneNo),
+                              ),
+                            ),
+                          ],
                         ),
                         const SizedBox(height: BLBSizes.spaceBtwInputFields),
 
                         ///Address
-                        TextFormField(
-                          expands: false,
-                          decoration: const InputDecoration(
-                              labelText: "Address",
-                              prefixIcon: Icon(Iconsax.home)),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 40,
+                              child: Icon(Iconsax.home),
+                            ),
+                            Expanded(
+                              child: TextFormField(
+                                decoration:
+                                    const InputDecoration(labelText: "Address"),
+                              ),
+                            ),
+                          ],
                         ),
                         const SizedBox(height: BLBSizes.spaceBtwSections),
 
@@ -181,7 +252,8 @@ class SignUpScreen extends StatelessWidget {
                         SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () =>
+                                    Get.to(() => const VerifyEmailScreen()),
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor:
                                         Color.fromRGBO(53, 237, 237, 1),
@@ -266,7 +338,7 @@ class SignUpScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextButton(
-                        onPressed: () => Get.offAll(OnboardingScreen()),
+                        onPressed: () => Get.to(() => NavigationMenu()),
                         child: Text(
                           "Skip for now",
                           style: TextStyle(
