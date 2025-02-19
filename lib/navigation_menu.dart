@@ -21,15 +21,20 @@ class NavigationMenu extends StatelessWidget {
           selectedIndex: controller.selectedIndex.value,
           onDestinationSelected: (index) =>
               controller.selectedIndex.value = index,
-          backgroundColor: darkMode ? BLBColors.black : BLBColors.white,
+          backgroundColor:
+              darkMode ? const Color.fromARGB(255, 0, 0, 0) : BLBColors.white,
           indicatorColor: darkMode
-              ? BLBColors.white.withOpacity(0.1)
-              : BLBColors.black.withOpacity(0.1),
+              ? BLBColors.white.withValues(alpha: 0.1)
+              : BLBColors.black.withValues(alpha: 0.1),
           destinations: const [
             NavigationDestination(icon: Icon(Iconsax.home), label: 'Home'),
-            NavigationDestination(icon: Icon(Iconsax.shop), label: 'Lend'),
             NavigationDestination(
-                icon: Icon(Iconsax.notification), label: 'Notifications'),
+              icon: Icon(Icons.density_medium_rounded),
+              label: "Categories",
+            ),
+            NavigationDestination(
+                icon: Icon(Iconsax.add_circle), label: 'Lend'),
+            NavigationDestination(icon: Icon(Iconsax.box), label: 'My Items'),
             NavigationDestination(
                 icon: Icon(Iconsax.setting), label: 'Settings'),
           ],
@@ -45,6 +50,7 @@ class NavigationController extends GetxController {
 
   final screens = [
     const HomeScreen(),
+    Container(color: Colors.green),
     Container(color: Colors.purple),
     Container(color: Colors.orange),
     Container(color: Colors.blue)
