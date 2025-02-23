@@ -13,7 +13,7 @@ class BLBRoundedImage extends StatelessWidget {
     this.applyImageRadius = true,
     required this.imageUrl,
     this.fit = BoxFit.contain,
-    this.backgroundColor = BLBColors.light,
+    this.backgroundColor = Colors.transparent,
     this.isNetworkImage = false,
     this.borderRadius = BLBSizes.md,
   });

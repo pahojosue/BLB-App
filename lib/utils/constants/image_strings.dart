@@ -22,8 +22,7 @@ class BLBImages {
   // -- Category Icons
   static const String sportIcon =
       "assets/icons/categories/icons8-bowling-64.png";
-  static const String clothIcon =
-      "assets/icons/categories/icons8-tailors-dummy-64.png";
+  static const String clothIcon = "assets/icons/icons8-tailors-dummy-64.png";
   static const String shoeIcon = "assets/icons/categories/icons8-shoes-64.png";
   static const String cosmeticsIcon =
       "assets/icons/categories/icons8-cosmetics-64.png";
