@@ -29,6 +29,7 @@ dependencies:
   flutter_native_splash: ^2.4.4
   smooth_page_indicator: ^1.2.0
   carousel_slider: ^5.0.0
+  flutter_launcher_icons: ^0.14.3
 
 #------------------ PACKAGES END ------------------#
 
@@ -45,6 +46,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/on_boarding_images/
+    - assets/images/user/
     - assets/logos/
     - assets/images/animations/
   

@@ -10,6 +10,8 @@ class BLBImages {
 
   static const String loginLogo = "assets/images/on_boarding_images/Mario.png";
 
+  static const String appLogo = "assets/logos/splash-logo.jpg";
+
   static const String darkLogo = "assets/logos/App-Logo-light.png";
   static const String lightLogo = "assets/logos/App-Logo-dark.png";
 
@@ -20,8 +22,7 @@ class BLBImages {
   // -- Category Icons
   static const String sportIcon =
       "assets/icons/categories/icons8-bowling-64.png";
-  static const String clothIcon =
-      "assets/icons/categories/icons8-tailors-dummy-64.png";
+  static const String clothIcon = "assets/icons/icons8-tailors-dummy-64.png";
   static const String shoeIcon = "assets/icons/categories/icons8-shoes-64.png";
   static const String cosmeticsIcon =
       "assets/icons/categories/icons8-cosmetics-64.png";
@@ -71,8 +72,12 @@ class BLBImages {
   static const String onBoardingImage3 =
       "assets/images/on_boarding_images/blb.jpg";
 
+  static const String hometestimage =
+      "assets/images/on_boarding_images/Mario.png";
+
   // -- Products
-  static const String productImage1 = "assets/images/products/nike-shoes.png";
+  static const String productImage1 =
+      "assets/images/on_boarding_images/nike-shoes.png";
   static const String productImage2 = "assets/images/products/product-1.png";
   static const String productImage3 =
       "assets/images/products/product-jacket.png";
@@ -247,7 +252,7 @@ class BLBImages {
   static const String banner8 = "assets/images/banners/banner_8.jpg";
 
   //Profile
-  static const String user = "assets/images/content/user.png";
+  static const String user = "assets/images/user/user.png";
 
   // -- Payment Methods
   static const String applePay = "assets/icons/payment_methods/apple-pay.png";
