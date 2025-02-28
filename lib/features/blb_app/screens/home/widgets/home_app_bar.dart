@@ -3,8 +3,6 @@ import 'package:blb/common/widgets/appbar/notifications_menu_icon.dart';
 import 'package:blb/utils/constants/colors.dart';
 import 'package:blb/utils/constants/image_strings.dart';
 import 'package:blb/utils/constants/sizes.dart';
-import 'package:blb/utils/constants/text_strings.dart';
-import 'package:blb/utils/device/device_utility.dart';
 import 'package:blb/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';

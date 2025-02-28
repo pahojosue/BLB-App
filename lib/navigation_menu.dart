@@ -1,3 +1,4 @@
+import 'package:blb/features/authentication/screens/settings/settings.dart';
 import 'package:blb/features/blb_app/screens/categories/categories.dart';
 import 'package:blb/features/blb_app/screens/home/home.dart';
 import 'package:blb/utils/constants/colors.dart';
@@ -54,6 +55,6 @@ class NavigationController extends GetxController {
     const CategoriesScreen(),
     Container(color: Colors.purple),
     Container(color: Colors.orange),
-    Container(color: Colors.blue)
+    const SettingsScreen()
   ];
 }

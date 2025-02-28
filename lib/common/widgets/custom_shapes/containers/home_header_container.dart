@@ -14,7 +14,7 @@ class BLBHomeHeaderContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return BLBHomeCurvedEdgeWidget(
       child: SizedBox(
-        height: this.height,
+        height: height,
         child: Container(
           color: Color.fromRGBO(53, 237, 237, 1),
           child: Stack(

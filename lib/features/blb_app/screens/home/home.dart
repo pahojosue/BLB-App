@@ -1,12 +1,8 @@
 import 'package:blb/common/widgets/Items/Item_card/item_card_vertical.dart';
 import 'package:blb/common/widgets/custom_shapes/containers/home_header_container.dart';
 import 'package:blb/features/blb_app/screens/home/widgets/home_app_bar.dart';
-import 'package:blb/utils/constants/colors.dart';
-import 'package:blb/utils/constants/image_strings.dart';
 import 'package:blb/utils/constants/sizes.dart';
-import 'package:blb/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -45,6 +41,8 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
+
+            const SizedBox(height: BLBSizes.spaceBtwSections)
           ],
         ),
       ),
