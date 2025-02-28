@@ -8,7 +8,7 @@ class BLBCircularContainer extends StatelessWidget {
     this.height = 400,
     this.radius = 400,
     this.padding = 0,
-    this.backgroundColor = const Color.fromARGB(255, 16, 231, 221),
+    this.backgroundColor = const Color.fromARGB(255, 16, 231, 221), required String image,
   });
 
   final double? width;

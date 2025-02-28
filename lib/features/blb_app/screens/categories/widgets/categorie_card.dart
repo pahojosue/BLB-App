@@ -5,7 +5,6 @@ import 'package:blb/utils/constants/image_strings.dart';
 import 'package:blb/utils/constants/sizes.dart';
 import 'package:blb/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 
 class BLBCategorieCard extends StatelessWidget {
   const BLBCategorieCard({super.key});

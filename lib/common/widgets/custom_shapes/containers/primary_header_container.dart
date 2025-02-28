@@ -14,8 +14,7 @@ class BLBPrimaryHeaderContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BLBCurvedEdgeWidget(
-      child: SizedBox(
-        height: this.height,
+      
         child: Container(
           color: Color.fromRGBO(53, 237, 237, 1),
           child: Stack(
@@ -24,7 +23,6 @@ class BLBPrimaryHeaderContainer extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }

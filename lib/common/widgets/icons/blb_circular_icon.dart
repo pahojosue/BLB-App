@@ -2,7 +2,6 @@ import 'package:blb/utils/constants/colors.dart';
 import 'package:blb/utils/constants/sizes.dart';
 import 'package:blb/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 
 class BLBCircularIcon extends StatelessWidget {
   const BLBCircularIcon({
