@@ -22,13 +22,6 @@ class BLBHomeAppBar extends StatelessWidget {
       title: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            width: 50,
-            height: 50,
-            child: Image(image: AssetImage(BLBImages.appLogo)),
-          ),
-
-          SizedBox(width: BLBSizes.spaceBtwItems),
           //SearchBar
           Expanded(
             child: Padding(

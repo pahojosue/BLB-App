@@ -1,12 +1,14 @@
 import 'package:blb/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:blb/common/widgets/icons/blb_circular_icon.dart';
 import 'package:blb/common/widgets/images/blb_rounded_image.dart';
+import 'package:blb/features/blb_app/screens/home/screens/item_details/item_details.dart';
 import 'package:blb/utils/constants/colors.dart';
 import 'package:blb/utils/constants/image_strings.dart';
 import 'package:blb/utils/constants/sizes.dart';
 import 'package:blb/utils/helpers/helper_functions.dart';
 import 'package:blb/common/styles/shadows.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class BLBItemCardVertical extends StatelessWidget {
@@ -16,7 +18,7 @@ class BLBItemCardVertical extends StatelessWidget {
   Widget build(BuildContext context) {
     final dark = BLBHelperFunctions.isDarkMode(context);
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Get.to(() => const ItemDetails()),
       child: Padding(
         padding: EdgeInsets.only(bottom: BLBSizes.spaceBtwItems),
         child: Container(
@@ -94,12 +96,6 @@ class BLBItemCardVertical extends StatelessWidget {
                                   Radius.circular(BLBSizes.productImageRadius),
                             ),
                           ),
-                          child: const SizedBox(
-                              width: BLBSizes.iconLg * 1.1,
-                              height: BLBSizes.iconLg * 1.1,
-                              child: Center(
-                                  child: Icon(Iconsax.add,
-                                      color: BLBColors.white))),
                         )
                       ],
                     ),
