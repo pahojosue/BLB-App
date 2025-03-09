@@ -1,10 +1,12 @@
 import 'package:blb/common/widgets/appbar/appbar.dart';
 import 'package:blb/common/widgets/appbar/notifications_menu_icon.dart';
+import 'package:blb/features/blb_app/screens/Notifications/notifications.dart';
+import 'package:blb/features/blb_app/screens/wishlist/wishlist.dart';
 import 'package:blb/utils/constants/colors.dart';
-import 'package:blb/utils/constants/image_strings.dart';
 import 'package:blb/utils/constants/sizes.dart';
 import 'package:blb/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class BLBHomeAppBar extends StatelessWidget {
@@ -42,9 +44,11 @@ class BLBHomeAppBar extends StatelessWidget {
         ],
       ),
       actions: [
-        Icon(Iconsax.heart),
+        IconButton(
+            onPressed: () => Get.to(() => const FavouriteScreen()),
+            icon: Icon(Iconsax.heart)),
         BLBNotificationsCounterIcon(
-            onPressed: () {},
+            onPressed: () => Get.to(() => const NotificationsScreen()),
             iconColor: dark ? BLBColors.white : BLBColors.black),
       ],
     );
