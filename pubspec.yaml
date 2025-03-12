@@ -30,6 +30,7 @@ dependencies:
   smooth_page_indicator: ^1.2.0
   carousel_slider: ^5.0.0
   flutter_launcher_icons: ^0.14.3
+  image_picker: ^1.1.2
 
 #------------------ PACKAGES END ------------------#
 
