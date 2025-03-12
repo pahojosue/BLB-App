@@ -16,13 +16,6 @@ class BLBUserProfileTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-<<<<<<< HEAD
-      leading: const BLBCircularImages(image: BLBImages.user, width: 50, height: 50, padding: 0),
-      
-      title: Text('Coding with BLB', style: Theme.of(context).textTheme.headlineSmall!.apply(color: BLBColors.white)),
-      subtitle: Text('support@codingwithBLB.com', style: Theme.of(context).textTheme.bodyMedium!.apply(color: BLBColors.white)),
-      trailing: IconButton(onPressed: () => Get.to(() => const ProfileScreen()), icon: const Icon(Iconsax.edit, color: BLBColors.white)),
-=======
       leading: const BLBCircularImages(
           image: BLBImages.user, width: 50, height: 50, padding: 0),
       title: Text('Coding with BLB',
@@ -38,7 +31,6 @@ class BLBUserProfileTile extends StatelessWidget {
       trailing: IconButton(
           onPressed: () => Get.to(() => const ProfileScreen()),
           icon: const Icon(Iconsax.edit, color: BLBColors.white)),
->>>>>>> fe1ae8f80bede60d135348bb0d7299ea1a66956f
     );
   }
 }
