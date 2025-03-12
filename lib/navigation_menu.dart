@@ -1,6 +1,7 @@
 import 'package:blb/features/authentication/screens/settings/settings.dart';
 import 'package:blb/features/blb_app/screens/categories/categories.dart';
 import 'package:blb/features/blb_app/screens/home/home.dart';
+import 'package:blb/features/blb_app/screens/myitems/myitems.dart';
 import 'package:blb/utils/constants/colors.dart';
 import 'package:blb/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +55,7 @@ class NavigationController extends GetxController {
     const HomeScreen(),
     const CategoriesScreen(),
     Container(color: Colors.purple),
-    Container(color: Colors.orange),
-    const SettingsScreen()
+    const MyitemsScreen(),
+    const SettingsScreen(),
   ];
 }

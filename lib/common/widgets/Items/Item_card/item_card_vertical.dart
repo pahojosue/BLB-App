@@ -39,6 +39,7 @@ class BLBItemCardVertical extends StatelessWidget {
                     //Thumbnail Image
                     const BLBRoundedImage(
                         imageUrl: BLBImages.appLogo, applyImageRadius: true),
+                       
                     //Favorite Icon Button
                     Positioned(
                         top: 0,

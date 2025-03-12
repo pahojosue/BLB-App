@@ -2,11 +2,13 @@ import 'package:blb/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 class BLBRoundedImage extends StatelessWidget {
-  const BLBRoundedImage({
+  const BLBRoundedImage(
+  {
     super.key,
     this.border,
     this.padding,
     this.onPressed,
+
     this.width,
     this.height,
     this.applyImageRadius = true,
@@ -32,25 +34,18 @@ class BLBRoundedImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onPressed,
-      child: Container(
+      child:Container(
         width: width,
         height: height,
         padding: padding,
-        decoration: BoxDecoration(
-            border: border,
-            color: backgroundColor,
-            borderRadius: BorderRadius.circular(borderRadius)),
+        decoration: BoxDecoration(border: border, color: backgroundColor, borderRadius: BorderRadius.circular(borderRadius)),
         child: ClipRRect(
-          borderRadius: applyImageRadius
-              ? BorderRadius.circular(borderRadius)
-              : BorderRadius.zero,
-          child: Image(
-              fit: fit,
-              image: isNetworkImage
-                  ? NetworkImage(imageUrl)
-                  : AssetImage(imageUrl) as ImageProvider),
-        ),
+          borderRadius: applyImageRadius ? BorderRadius.circular(borderRadius) : BorderRadius.zero, 
+          child: Image(fit: fit, image: isNetworkImage? NetworkImage(imageUrl) :  AssetImage(imageUrl) as ImageProvider),
+        
+      ),
       ),
     );
   }
+  
 }

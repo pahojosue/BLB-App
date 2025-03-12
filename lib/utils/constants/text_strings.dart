@@ -68,4 +68,6 @@ class BLBTexts {
   // -- Home
   static const String homeAppbarTitle = "Good day to explore";
   static const String homeAppbarSubTitle = "Paho Josue";
+
+  static const String searchContainer = "Search Items";
 }
