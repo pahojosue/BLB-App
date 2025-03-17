@@ -48,11 +48,7 @@ class SettingsScreen extends StatelessWidget {
                   BLBSectionHeading(title: 'Account Settings'),
                   SizedBox(height: BLBSizes.spaceBtwItems),
 
-                  BlbSettingsMenuTile(icon: Iconsax.safe_home, title: 'My Addresses', subtitle: 'Set shopping delivery address', onTap: () {},),
-                  BlbSettingsMenuTile(icon: Iconsax.shopping_cart, title: 'My Cart', subtitle: 'Add, remove products and move to checkout', onTap: () {},),
-                  BlbSettingsMenuTile(icon: Iconsax.bag_tick, title: 'My Orders', subtitle: 'In-Progress and Completed Orders', onTap: () {},),
-                  BlbSettingsMenuTile(icon: Iconsax.bank, title: 'Bank Account', subtitle: 'Withdraw balance to registered bank account', onTap: () {},),
-                  BlbSettingsMenuTile(icon: Iconsax.discount_shape, title: 'My Coupons', subtitle: 'List of all the discounted coupons', onTap: () {},),
+                  BlbSettingsMenuTile(icon: Iconsax.safe_home, title: 'Addresses', subtitle: 'Set shopping delivery address', onTap: () {},),
                   BlbSettingsMenuTile(icon: Iconsax.notification, title: 'Notifications', subtitle: 'Set any kind of notification message', onTap: () {},),
                   BlbSettingsMenuTile(icon: Iconsax.security_card, title: 'Account Privacy', subtitle: 'Manage data usage and connected accounts', onTap: () {},),
 
