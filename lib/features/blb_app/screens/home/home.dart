@@ -42,8 +42,6 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-
-            const SizedBox(height: BLBSizes.spaceBtwSections)
           ],
         ),
       ),

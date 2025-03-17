@@ -34,14 +34,17 @@ class BLBItemCardVertical extends StatelessWidget {
               //Thumbnail (Image)
               BLBRoundedContainer(
                 height: 140,
+                width: double.infinity,
                 padding: const EdgeInsets.all(BLBSizes.sm),
                 backgroundColor: dark ? BLBColors.dark : BLBColors.light,
                 child: Stack(
                   children: [
                     //Thumbnail Image
-                    const BLBRoundedImage(
-                        imageUrl: BLBImages.appLogo, applyImageRadius: true),
-                       
+                    Center(
+                      child: const BLBRoundedImage(
+                          imageUrl: BLBImages.appLogo, applyImageRadius: true),
+                    ),
+
                     //Favorite Icon Button
                     Positioned(
                         top: 0,
@@ -60,8 +63,8 @@ class BLBItemCardVertical extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "A good logo available for you",
-                      style: Theme.of(context).textTheme.labelLarge,
+                      "<<Item Name>>",
+                      style: Theme.of(context).textTheme.headlineSmall,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                       textAlign: TextAlign.left,
@@ -69,13 +72,11 @@ class BLBItemCardVertical extends StatelessWidget {
                     SizedBox(height: BLBSizes.spaceBtwItems / 2),
                     Row(
                       children: [
-                        Text("Logo",
+                        Text("<<Lender Name>>",
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
-                            style: Theme.of(context).textTheme.labelMedium),
+                            style: Theme.of(context).textTheme.labelLarge),
                         const SizedBox(width: BLBSizes.xs),
-                        const Icon(Iconsax.verify5,
-                            color: BLBColors.primary, size: BLBSizes.iconXs),
                       ],
                     ),
                     Row(
