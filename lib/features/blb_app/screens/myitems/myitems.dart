@@ -6,6 +6,7 @@ import 'package:blb/common/widgets/custom_shapes/containers/primary_header_conta
 import 'package:blb/common/widgets/images/blb_rounded_image.dart';
 import 'package:blb/features/authentication/controllers.onboarding/onboarding_controller.dart';
 import 'package:blb/features/authentication/screens/settings/blb_section_heading.dart';
+import 'package:blb/features/blb_app/screens/home/screens/item_details/item_details.dart';
 import 'package:blb/features/blb_app/screens/myitems/widget/bartered_items.dart';
 import 'package:blb/features/blb_app/screens/myitems/widget/borrowed_items.dart';
 import 'package:blb/features/blb_app/screens/myitems/widget/lent_items.dart';
@@ -57,10 +58,11 @@ class MyitemsScreen extends StatelessWidget {
             viewportFraction:1,
             onPageChanged: (index, _) => controller.updatePageIndicator(index)
           ),
+          
           items: [
-            BLBRoundedImage(imageUrl: BLBImages.banner1),
-            BLBRoundedImage(imageUrl: BLBImages.banner8),
-            BLBRoundedImage(imageUrl: BLBImages.banner5),
+            BLBRoundedImage(imageUrl: BLBImages.banner1, onPressed: () => Get.to(() => ItemDetails())),
+            BLBRoundedImage(imageUrl: BLBImages.banner8, onPressed: () => Get.to(() => ItemDetails())),
+            BLBRoundedImage(imageUrl: BLBImages.banner5, onPressed: () => Get.to(() => ItemDetails())),
 
 
           ],
@@ -97,9 +99,9 @@ Padding(
             onPageChanged: (index, _) => controller.updatePageIndicator(index)
           ),
           items: [
-            BLBRoundedImage(imageUrl: BLBImages.banner2),
-            BLBRoundedImage(imageUrl: BLBImages.banner4),
-            BLBRoundedImage(imageUrl: BLBImages.banner6),
+            BLBRoundedImage(imageUrl: BLBImages.banner2, onPressed: () => Get.to(() => ItemDetails())),
+            BLBRoundedImage(imageUrl: BLBImages.banner4, onPressed: () => Get.to(() => ItemDetails())),
+            BLBRoundedImage(imageUrl: BLBImages.banner6, onPressed: () => Get.to(() => ItemDetails())),
 
           ],
 
@@ -134,9 +136,9 @@ Padding(
             viewportFraction:1,
           ),
           items: [
-            BLBRoundedImage(imageUrl: BLBImages.banner7),
-            BLBRoundedImage(imageUrl: BLBImages.banner4),
-            BLBRoundedImage(imageUrl: BLBImages.banner6),
+            BLBRoundedImage(imageUrl: BLBImages.banner7, onPressed: () => Get.to(() => ItemDetails())),
+            BLBRoundedImage(imageUrl: BLBImages.banner4, onPressed: () => Get.to(() => ItemDetails())),
+            BLBRoundedImage(imageUrl: BLBImages.banner6, onPressed: () => Get.to(() => ItemDetails())),
 
           ],
 

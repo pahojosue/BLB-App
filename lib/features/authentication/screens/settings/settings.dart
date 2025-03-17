@@ -45,19 +45,18 @@ class SettingsScreen extends StatelessWidget {
               child: Column(
                 children: [
                   /// -- Account Settings
-                  BLBSectionHeading(title: 'Account Settings'),
+                  BLBSectionHeading(title: 'Account Settings', buttonTitle: ""),
                   SizedBox(height: BLBSizes.spaceBtwItems),
 
                   BlbSettingsMenuTile(icon: Iconsax.safe_home, title: 'Addresses', subtitle: 'Set shopping delivery address', onTap: () {},),
                   BlbSettingsMenuTile(icon: Iconsax.notification, title: 'Notifications', subtitle: 'Set any kind of notification message', onTap: () {},),
-                  BlbSettingsMenuTile(icon: Iconsax.security_card, title: 'Account Privacy', subtitle: 'Manage data usage and connected accounts', onTap: () {},),
-
+                  
 
                   /// -- App Settings
                   SizedBox(height: BLBSizes.spaceBtwSections),
-                  BLBSectionHeading(title: 'App Settings'),
+                  BLBSectionHeading(title: 'App Settings', buttonTitle: ""),
                   SizedBox(height: BLBSizes.spaceBtwItems),
-                  BlbSettingsMenuTile(icon: Iconsax.document_upload, title: 'Load Data', subtitle: 'Upload Data to your Cloud Firebase'),
+                  
                   BlbSettingsMenuTile(
                     icon: Iconsax.location,
                     title: 'Geolocation',
@@ -65,12 +64,6 @@ class SettingsScreen extends StatelessWidget {
                     trailing: Switch(value: true, onChanged: (value){}),
                   ),
 
-                  BlbSettingsMenuTile(
-                    icon: Iconsax.security_user,
-                    title: 'Safe Mode',
-                    subtitle: 'Search result is safe for all ages',
-                    trailing: Switch(value: false, onChanged: (value){}),
-                  ),
 
                   BlbSettingsMenuTile(
                     icon: Iconsax.image,
