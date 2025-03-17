@@ -2,6 +2,7 @@ import 'package:blb/common/widgets/Items/Item_card/item_card_vertical.dart';
 import 'package:blb/common/widgets/custom_shapes/containers/home_header_container.dart';
 import 'package:blb/features/blb_app/screens/home/widgets/home_app_bar.dart';
 import 'package:blb/utils/constants/sizes.dart';
+import 'package:blb/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -14,7 +15,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             BLBHomeHeaderContainer(
-              height: 106,
+              height: BLBHelperFunctions.screenHeight() * 0.12,
               child: Column(
                 children: [
                   //AppBar

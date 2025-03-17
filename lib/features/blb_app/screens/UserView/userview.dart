@@ -1,7 +1,6 @@
 import 'package:blb/common/widgets/Items/Item_card/item_card_horizontal.dart';
 import 'package:blb/common/widgets/appbar/appbar.dart';
 import 'package:blb/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:blb/features/authentication/screens/settings/layouts/list_tiles/user_profile_tile.dart';
 import 'package:blb/utils/constants/sizes.dart';
 import 'package:blb/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
@@ -47,10 +46,17 @@ class Userview extends StatelessWidget {
                 width: BLBHelperFunctions.screenWidth(),
                 child: Row(
                   children: [
-                    Buttons(
-                        text: "Reject", onPressed: () {}, color: Colors.red),
-                    const SizedBox(width: BLBSizes.spaceBtwItems),
-                    Buttons(text: "Accept", onPressed: () {})
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Buttons(
+                              text: "Reject",
+                              onPressed: () {},
+                              color: Colors.red),
+                          Buttons(text: "Accept", onPressed: () {})
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),

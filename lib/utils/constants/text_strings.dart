@@ -70,8 +70,9 @@ class BLBTexts {
   static const String homeAppbarSubTitle = "Paho Josue";
 
   static const String searchContainer = "Search Items";
+
   static const String borrowingRequestTitle = "Borrowing Request";
   static String borrowingRequestSubtitle(String user) {
     return "User $user is interested in borrowing your item";
-  } 
+  }
 }
