@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "806907119672",
+    "project_id": "blb-app-4a9d1",
+    "storage_bucket": "blb-app-4a9d1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:806907119672:android:160ab507b770248bc13ecd",
+        "android_client_info": {
+          "package_name": "com.example.blb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "806907119672-vv6if8um2n8lh0q7pn5ftt1lddbogfib.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.blb",
+            "certificate_hash": "6620cf97d0e119ab64bfcaa52cda440b07e33f1c"
+          }
+        },
+        {
+          "client_id": "806907119672-cudstokge261k8t0kcmnocs6l8kvvm2t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-iVqOLW0OYLaE7w_FamAWCmkCYx0JKKE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "806907119672-7j4i4mecspt2p57fitp11uuo57bir0qh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "806907119672-331abj7plvuqntt178n1tbf46o1k595v.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.blb"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
