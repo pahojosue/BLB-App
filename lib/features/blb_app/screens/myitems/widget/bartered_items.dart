@@ -3,7 +3,7 @@ import 'package:blb/common/widgets/Items/Item_card/item_card_vertical.dart';
 import 'package:blb/common/widgets/Items/Item_card/search_container_view_model.dart';
 import 'package:blb/common/widgets/appbar/appbar.dart';
 import 'package:blb/common/widgets/custom_shapes/containers/primary_header_container.dart';
-import 'package:blb/features/authentication/controllers.onboarding/onboarding_controller.dart';
+import 'package:blb/features/authentication/controllers/onboarding/onboarding_controller.dart';
 import 'package:blb/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,22 +18,25 @@ class BarteredItemsScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            BLBPrimaryHeaderContainer(
+              height: 106,
+              child: Column(
+                children: [
+                  BLBAppBar(
+                      showBackArrow: true,
+                      title: Text("Bartered Items",
+                          style: Theme.of(context).textTheme.headlineMedium)),
 
-           BLBPrimaryHeaderContainer(
-            height: 106,
-            child: Column(
-              children: [
-  BLBAppBar(showBackArrow: true, title: Text("Bartered Items", style: Theme.of(context).textTheme.headlineMedium)),
-/// --SearchBar
-       BLBSearchContainer(text: 'Search item', searchContainerModel: SearchContainerModel()),
-        SizedBox(height: BLBSizes.spaceBtwSections),
-          ],
-        
-      ),
+                  /// --SearchBar
+                  BLBSearchContainer(
+                      text: 'Search item',
+                      searchContainerModel: SearchContainerModel()),
+                  SizedBox(height: BLBSizes.spaceBtwSections),
+                ],
+              ),
+            ),
 
-      ),
-
-      //Vertical Item Cards
+            //Vertical Item Cards
             SizedBox(height: BLBSizes.spaceBtwSections),
             Padding(
               padding: EdgeInsets.all(BLBSizes.defaultSpace),
@@ -60,7 +63,3 @@ class BarteredItemsScreen extends StatelessWidget {
     );
   }
 }
-
-
-
-

@@ -7,6 +7,7 @@ class BLBImages {
       "assets/logos/t-store-splash-logo-black.png";
   static const String lightAppLogo =
       "assets/logos/t-store-splash-logo-white.png";
+  static const String docerAnimation = "assets/images/animations/docer.mp4";
 
   static const String loginLogo = "assets/images/on_boarding_images/Mario.png";
 
