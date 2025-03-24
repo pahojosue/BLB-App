@@ -1,4 +1,4 @@
-import 'package:blb/features/authentication/screens/onboarding/onboarding.dart';
+import 'package:blb/bindings/general_bindings.dart';
 import 'package:blb/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:blb/utils/theme/theme.dart';
@@ -13,6 +13,7 @@ class App extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: BLBAppTheme.lightTheme,
       darkTheme: BLBAppTheme.darkTheme,
+      initialBinding: GeneralBindings(),
       //Show Loader
       home: const Scaffold(
           backgroundColor: BLBColors.primary,

@@ -1,4 +1,4 @@
-import 'package:blb/features/authentication/controllers.onboarding/onboarding_controller.dart';
+import 'package:blb/features/authentication/controllers/onboarding/onboarding_controller.dart';
 import 'package:blb/features/authentication/screens/onboarding/widgets/onboarding_dot_navigation.dart';
 import 'package:blb/features/authentication/screens/onboarding/widgets/onboarding_next.dart';
 import 'package:blb/features/authentication/screens/onboarding/widgets/onboarding_page.dart';

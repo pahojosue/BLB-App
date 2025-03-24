@@ -1,7 +1,7 @@
 import 'package:blb/common/styles/spacing_styles.dart';
 import 'package:blb/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:blb/features/authentication/screens/password_configuration/forgot_password.dart';
-import 'package:blb/features/authentication/screens/signup/widgets/signup.dart';
+import 'package:blb/features/authentication/screens/signup/signup.dart';
 import 'package:blb/navigation_menu.dart';
 import 'package:blb/utils/constants/colors.dart';
 import 'package:blb/utils/constants/image_strings.dart';
