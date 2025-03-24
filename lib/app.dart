@@ -1,4 +1,3 @@
-import 'package:blb/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:blb/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:blb/utils/theme/theme.dart';
