@@ -2,7 +2,9 @@ import 'package:blb/data/repositories/authentication/authentication_repository.d
 import 'package:blb/data/repositories/user/user_repository.dart';
 import 'package:blb/features/authentication/screens/signup/widgets/verify_email.dart';
 import 'package:blb/features/personalisation/models/user_model.dart';
+import 'package:blb/utils/constants/image_strings.dart';
 import 'package:blb/utils/helpers/network_manager.dart';
+import 'package:blb/utils/popups/full_screen_loader.dart';
 import 'package:blb/utils/popups/loaders.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,23 +27,20 @@ class SignupController extends GetxController {
   //--SIGNUP
   Future<void> signup() async {
     try {
-      print("hey");
       //Start Loading
-      // BLBFullScreenLoader.openLoadingDialog(
-      //     "We are processing your information...", BLBImages.docerAnimation);
-      print("hey2");
+      BLBFullScreenLoader.openLoadingDialog(
+          "We are processing your information...", BLBImages.docerAnimation);
 
       //Check Internet Connectivity
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
-        // BLBFullScreenLoader.stopLoading();
-        print("hey3");
+        BLBFullScreenLoader.stopLoading();
         return;
       }
 
       //Form Validation
       if (!signupFormKey.currentState!.validate()) {
-        // BLBFullScreenLoader.stopLoading();
+        BLBFullScreenLoader.stopLoading();
         return;
       }
 
@@ -76,7 +75,7 @@ class SignupController extends GetxController {
       await userRepository.saveUserRecord(newUser);
 
       //Remove Loader
-      // BLBFullScreenLoader.stopLoading();
+      BLBFullScreenLoader.stopLoading();
 
       //Show success Message
       BLBLoaders.successSnackBar(
@@ -87,7 +86,7 @@ class SignupController extends GetxController {
       Get.to(() => const VerifyEmailScreen());
     } catch (e) {
       //Remove loader
-      // BLBFullScreenLoader.stopLoading();
+      BLBFullScreenLoader.stopLoading();
       //Show some generic error to the user
       BLBLoaders.errorSnackBar(title: "Oops!", message: e.toString());
     }
