@@ -1,0 +1,2 @@
+C:/Users/HP/Desktop/BLB-App/android/app/.cxx/Debug/5p6p4vd5/x86/CMakeFiles/edit_cache.dir
+C:/Users/HP/Desktop/BLB-App/android/app/.cxx/Debug/5p6p4vd5/x86/CMakeFiles/rebuild_cache.dir

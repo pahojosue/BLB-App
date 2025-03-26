@@ -1,4 +1,6 @@
 import 'package:blb/features/authentication/screens/login/login.dart';
+import 'package:blb/features/authentication/screens/signup/widgets/verify_email.dart';
+import 'package:blb/navigation_menu.dart';
 import 'package:blb/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:blb/utils/exceptions/firebase_exceptions.dart';
 import 'package:blb/utils/exceptions/format_exceptions.dart';
@@ -27,7 +29,16 @@ class AuthenticationRepository extends GetxController {
 
   //Function to show relevant screen
   screenRedirect() async {
-    //Local Storage
+    final user = _auth.currentUser;
+    if(user != null){
+      if(user.emailVerified){
+        Get.offAll(() => const NavigationMenu());
+      } else{
+        Get.offAll(() => VerifyEmailScreen(email: _auth.currentUser?.email));
+      }
+    } else {
+
+       //Local Storage
 
     if (kDebugMode) {
       print("================= GeT STORAGE Auth Repo ================");
@@ -40,6 +51,9 @@ class AuthenticationRepository extends GetxController {
         ? Get.offAll(() => const LoginScreen())
         : Get.offAll(const OnboardingScreen());
   }
+
+    }
+   
 
   /* -------------------------Email and password sign-in ---------------------*/
   //[Email Authentication] - SignIn
@@ -64,6 +78,21 @@ class AuthenticationRepository extends GetxController {
   }
 
   //[Email Verification] - Mail Verification
+  Future<void> sendEmailVerification() async {
+    try {
+      await _auth.currentUser?.sendEmailVerification();
+    } on FirebaseAuthException catch (e) {
+      throw BLBFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw BLBFirebaseAuthException(e.code).message;
+    } on FormatException catch (_) {
+      throw const BLBFormatException();
+    } on PlatformException catch (e) {
+      throw BLBPlatformException(e.code).message;
+    }catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+    }
 
   //[ReAuthentication] - ReAuthenticate User
 
@@ -75,7 +104,24 @@ class AuthenticationRepository extends GetxController {
   //[FacebookAuthentication] - Facebook
 
   /* --------------------- ./end Federated identity & social sign-in -----------------*/
+
   //[LogoutUser] - Valid for any Authentication.
+  Future<void> logout() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      Get.offAll(() => const LoginScreen());
+    } on FirebaseAuthException catch (e) {
+      throw BLBFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw BLBFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const BLBFormatException();
+    } on PlatformException catch (e) {
+      throw BLBPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
 
   //[DeleteUser] - Remove user Auth and Firestore Account.
 }

@@ -1,4 +1,8 @@
+import 'dart:async';
+
 import 'package:blb/common/widgets/success_screen/success_screen1.dart';
+import 'package:blb/data/repositories/authentication/authentication_repository.dart';
+import 'package:blb/features/authentication/controllers/signup/verify_email_controller.dart';
 import 'package:blb/features/authentication/screens/login/login.dart';
 import 'package:blb/utils/constants/image_strings.dart';
 import 'package:blb/utils/constants/sizes.dart';
@@ -9,18 +13,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class VerifyEmailScreen extends StatelessWidget {
-  const VerifyEmailScreen({super.key});
+  const VerifyEmailScreen({super.key, this.email});
+
+  final String? email;
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(VerifyEmailController());
+
+
     return Scaffold(
       appBar: AppBar(
-        // automaticallyImplyLeading: false,
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(
-              onPressed: () => Get.offAll(() => const LoginScreen()),
-              icon: const Icon(CupertinoIcons.clear))
-        ],
+              onPressed: () => AuthenticationRepository.instance.logout(), icon: const Icon(CupertinoIcons.clear))],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -39,7 +46,7 @@ class VerifyEmailScreen extends StatelessWidget {
                   style: Theme.of(context).textTheme.headlineMedium,
                   textAlign: TextAlign.center),
               const SizedBox(height: BLBSizes.spaceBtwItems),
-              Text('support@blbapp.com',
+              Text(email ?? '',
                   style: Theme.of(context).textTheme.labelLarge,
                   textAlign: TextAlign.center),
               const SizedBox(height: BLBSizes.spaceBtwItems),
@@ -47,34 +54,34 @@ class VerifyEmailScreen extends StatelessWidget {
                   style: Theme.of(context).textTheme.labelMedium,
                   textAlign: TextAlign.center),
               const SizedBox(height: BLBSizes.spaceBtwSections),
+              
 
               //Button
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                    onPressed: () => Get.to(() => const SuccessScreen()),
+                    onPressed: () => controller.checkEmailVerificationStatus(),
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromRGBO(53, 237, 237, 1),
                         side:
                             BorderSide(color: Color.fromRGBO(53, 237, 237, 1))),
-                    child: Text(
-                      "Continue",
-                      style: TextStyle(
-                          color: Theme.of(context).brightness == Brightness.dark
-                              ? Colors.white
-                              : Colors.black),
-                    )),
-              ),
+
+                    child: const Text(BLBTexts.tContinue)),
+                     ),                    
+                    
               const SizedBox(height: BLBSizes.spaceBtwItems),
               SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                    onPressed: () {}, child: const Text(BLBTexts.resendEmail)),
+                    onPressed: () => controller.sendEmailVerification(), child: const Text(BLBTexts.resendEmail)),
               ),
             ],
-          ),
-        ),
-      ),
-    );
+              ),
+
+              ),
+
+              ),
+
+        );
   }
 }
