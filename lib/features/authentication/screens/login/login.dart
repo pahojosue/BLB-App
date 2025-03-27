@@ -1,16 +1,14 @@
 import 'package:blb/common/styles/spacing_styles.dart';
 import 'package:blb/common/widgets/custom_shapes/containers/primary_header_container.dart';
-import 'package:blb/features/authentication/screens/password_configuration/forgot_password.dart';
+import 'package:blb/features/authentication/screens/login/widgets/login_form.dart';
 import 'package:blb/features/authentication/screens/signup/signup.dart';
 import 'package:blb/navigation_menu.dart';
 import 'package:blb/utils/constants/colors.dart';
 import 'package:blb/utils/constants/image_strings.dart';
 import 'package:blb/utils/constants/sizes.dart';
-import 'package:blb/utils/constants/text_strings.dart';
 import 'package:blb/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -66,81 +64,7 @@ class LoginScreen extends StatelessWidget {
                   SizedBox(height: BLBSizes.spaceBtwItems),
 
                   //Form
-                  Form(
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.symmetric(vertical: BLBSizes.md - 4),
-                      child: Column(
-                        children: [
-                          //Email
-                          TextFormField(
-                            decoration: InputDecoration(
-                              labelText: "Enter Email",
-                              suffixIcon: Icon(Icons.email),
-                            ),
-                          ),
-                          const SizedBox(
-                              height: BLBSizes.spaceBtwInputFields * 1.5),
-                          //Password
-                          TextFormField(
-                            decoration: InputDecoration(
-                              labelText: BLBTexts.password,
-                              suffixIcon: Icon(Iconsax.password_check),
-                            ),
-                          ),
-                          const SizedBox(
-                              height: BLBSizes.spaceBtwInputFields / 2),
-
-                          //Remember Me & Forgot Password
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              //Remember me
-                              Row(
-                                children: [
-                                  Checkbox(value: true, onChanged: (value) {}),
-                                  const Text(BLBTexts.rememberMe),
-                                ],
-                              ),
-                              //Forget Password
-                              TextButton(
-                                onPressed: () =>
-                                    Get.to(() => const ForgotPassword()),
-                                // style: TextButton.styleFrom(
-                                //     textStyle: TextStyle(fontSize: BLBSizes.md)),
-                                child: const Text("Forgot Password"),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: BLBSizes.sm,
-                          ),
-
-                          //Sign In Button
-                          SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton(
-                                  onPressed: () =>
-                                      Get.to(() => const NavigationMenu()),
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor:
-                                          Color.fromRGBO(53, 237, 237, 1),
-                                      side: BorderSide(
-                                          color:
-                                              Color.fromRGBO(53, 237, 237, 1))),
-                                  child: Text(
-                                    BLBTexts.signIn,
-                                    style: TextStyle(
-                                        color: Theme.of(context).brightness ==
-                                                Brightness.dark
-                                            ? Colors.white
-                                            : Colors.black),
-                                  ))),
-                          const SizedBox(height: BLBSizes.spaceBtwItems),
-                        ],
-                      ),
-                    ),
-                  ),
+                  const BLBLoginForm(),
 
                   //Divider
                   Row(

@@ -27,36 +27,57 @@ class AuthenticationRepository extends GetxController {
     screenRedirect();
   }
 
+  @override
+  void onInit() {
+    deviceStorage.write("REMEMBER_ME_EMAIL", "");
+    deviceStorage.write("REMEMBER_ME_PASSWORD", "");
+    super.onInit();
+  }
+
   //Function to show relevant screen
   screenRedirect() async {
     final user = _auth.currentUser;
-    if(user != null){
-      if(user.emailVerified){
+    if (user != null) {
+      if (user.emailVerified) {
         Get.offAll(() => const NavigationMenu());
-      } else{
+      } else {
         Get.offAll(() => VerifyEmailScreen(email: _auth.currentUser?.email));
       }
     } else {
+      //Local Storage
 
-       //Local Storage
+      if (kDebugMode) {
+        print("================= GeT STORAGE Auth Repo ================");
+        print(deviceStorage.read('IsFirstTime'));
+      }
 
-    if (kDebugMode) {
-      print("================= GeT STORAGE Auth Repo ================");
-      print(deviceStorage.read('IsFirstTime'));
+      deviceStorage.writeIfNull('IsFirstTime', true);
+      deviceStorage.write('IsFirstTime', true);
+      deviceStorage.read('IsFirstTime') != true
+          ? Get.offAll(() => const LoginScreen())
+          : Get.offAll(const OnboardingScreen());
     }
-
-    deviceStorage.writeIfNull('IsFirstTime', true);
-    deviceStorage.write('IsFirstTime', true);
-    deviceStorage.read('IsFirstTime') != true
-        ? Get.offAll(() => const LoginScreen())
-        : Get.offAll(const OnboardingScreen());
   }
-
-    }
-   
 
   /* -------------------------Email and password sign-in ---------------------*/
   //[Email Authentication] - SignIn
+  Future<UserCredential> loginWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      return await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      throw BLBFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw BLBFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const BLBFormatException();
+    } on PlatformException catch (e) {
+      throw BLBPlatformException(e.code).message;
+    } catch (e) {
+      throw "Something went wrong. Please try again";
+    }
+  }
 
   //[Email Authentication] - Register
   Future<UserCredential> registerWithEmailAndPassword(
@@ -89,10 +110,10 @@ class AuthenticationRepository extends GetxController {
       throw const BLBFormatException();
     } on PlatformException catch (e) {
       throw BLBPlatformException(e.code).message;
-    }catch (e) {
+    } catch (e) {
       throw 'Something went wrong. Please try again';
     }
-    }
+  }
 
   //[ReAuthentication] - ReAuthenticate User
 
