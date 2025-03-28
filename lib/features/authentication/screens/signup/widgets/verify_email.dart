@@ -1,9 +1,6 @@
-import 'dart:async';
 
-import 'package:blb/common/widgets/success_screen/success_screen1.dart';
 import 'package:blb/data/repositories/authentication/authentication_repository.dart';
 import 'package:blb/features/authentication/controllers/signup/verify_email_controller.dart';
-import 'package:blb/features/authentication/screens/login/login.dart';
 import 'package:blb/utils/constants/image_strings.dart';
 import 'package:blb/utils/constants/sizes.dart';
 import 'package:blb/utils/constants/text_strings.dart';

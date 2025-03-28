@@ -1,9 +1,9 @@
 import 'package:blb/data/repositories/authentication/authentication_repository.dart';
+import 'package:blb/features/personalisation/controllers/user_controller.dart';
 import 'package:blb/utils/constants/image_strings.dart';
 import 'package:blb/utils/helpers/network_manager.dart';
 import 'package:blb/utils/popups/full_screen_loader.dart';
 import 'package:blb/utils/popups/loaders.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -16,6 +16,7 @@ class LoginController extends GetxController {
   final email = TextEditingController();
   final password = TextEditingController();
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+
 
   @override
   void onInit() {
@@ -63,4 +64,39 @@ class LoginController extends GetxController {
       BLBLoaders.errorSnackBar(title: "Oh Snap", message: e.toString());
     }
   }
+
 }
+
+/// -- Google SignIn Authentication
+
+ Future<void> googleSignIn() async {
+    try {
+      // Start Loading
+      BLBFullScreenLoader.openLoadingDialog('Logging you in...', BLBImages.docerAnimation);
+
+      //Check Internet Connectivity
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        BLBFullScreenLoader.stopLoading();
+        return;
+      }
+
+      // Google Authentication
+      final userCredentials = await AuthenticationRepository.instance.signInWithGoogle();
+
+      // Save User Record
+      await UserController.instance.saveUserRecord(userCredentials);
+
+      // Remove Loader
+      BLBFullScreenLoader.stopLoading();
+
+      // Redirect
+      AuthenticationRepository.instance.screenRedirect();
+
+    } catch (e){
+      BLBFullScreenLoader.stopLoading();
+      BLBLoaders.errorSnackBar(title: 'Oups!', message: e.toString());
+
+      
+    }
+  }

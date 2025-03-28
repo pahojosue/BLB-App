@@ -1,6 +1,7 @@
 import 'package:blb/common/styles/spacing_styles.dart';
 import 'package:blb/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:blb/features/authentication/screens/login/widgets/login_form.dart';
+import 'package:blb/features/authentication/screens/login/widgets/social_buttons.dart';
 import 'package:blb/features/authentication/screens/signup/signup.dart';
 import 'package:blb/navigation_menu.dart';
 import 'package:blb/utils/constants/colors.dart';
@@ -97,33 +98,7 @@ class LoginScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: BLBColors.grey),
-                            borderRadius: BorderRadius.circular(100)),
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: const Image(
-                            width: BLBSizes.iconLg,
-                            height: BLBSizes.iconLg,
-                            image: AssetImage(BLBImages.google),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: BLBSizes.spaceBtwItems),
-                      Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: BLBColors.grey),
-                            borderRadius: BorderRadius.circular(100)),
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: const Image(
-                            width: BLBSizes.iconLg,
-                            height: BLBSizes.iconLg,
-                            image: AssetImage(BLBImages.facebook),
-                          ),
-                        ),
-                      ),
+                      BLBSocialButtons(),
                     ],
                   ),
 
