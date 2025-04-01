@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 class UserController extends GetxController {
   static UserController get instance => Get.find();
 
+
   /// Save user Record from any Registration provider
   Future<void> saveUserRecord(UserCredential? userCredentials) async {
     try {
@@ -38,4 +39,5 @@ class UserController extends GetxController {
     }
    
   }
+
 }

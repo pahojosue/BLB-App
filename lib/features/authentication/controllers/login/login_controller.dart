@@ -17,6 +17,7 @@ class LoginController extends GetxController {
   final password = TextEditingController();
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
 
+   googleSignIn() {}
 
   @override
   void onInit() {
@@ -61,7 +62,7 @@ class LoginController extends GetxController {
       AuthenticationRepository.instance.screenRedirect();
     } catch (e) {
       BLBFullScreenLoader.stopLoading();
-      BLBLoaders.errorSnackBar(title: "Oh Snap", message: e.toString());
+      BLBLoaders.errorSnackBar(title: "Oups", message: e.toString());
     }
   }
 

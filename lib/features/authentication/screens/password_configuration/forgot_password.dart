@@ -1,6 +1,7 @@
-import 'package:blb/features/authentication/screens/password_configuration/reset_password.dart';
+import 'package:blb/features/authentication/controllers/forgot_password/forgot_password_cntroller.dart';
 import 'package:blb/utils/constants/sizes.dart';
 import 'package:blb/utils/constants/text_strings.dart';
+import 'package:blb/utils/validators/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,6 +10,7 @@ class ForgotPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ForgotPasswordController());
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -25,29 +27,26 @@ class ForgotPassword extends StatelessWidget {
             const SizedBox(height: BLBSizes.spaceBtwSections * 2),
 
             //Text field
-            TextFormField(
+            Form(
+              key: controller.forgotPasswordFormKey,
+              child: TextFormField(
+                controller: controller.email,
+                validator: BLBValidator.validateEmail,
               decoration: const InputDecoration(
                 labelText: BLBTexts.email,
                 prefixIcon: Icon(Icons.email),
               ),
+              ),
             ),
             const SizedBox(height: BLBSizes.spaceBtwSections),
 
+         
             //static button
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                  onPressed: () => Get.off(() => ResetPassword()),
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromRGBO(53, 237, 237, 1),
-                      side: BorderSide(color: Color.fromRGBO(53, 237, 237, 1))),
-                  child: Text(
-                    BLBTexts.submit,
-                    style: TextStyle(
-                        color: Theme.of(context).brightness == Brightness.dark
-                            ? Colors.white
-                            : Colors.black),
-                  )),
+                  onPressed: () => controller.sendPasswordResetEmail() , child: const Text(BLBTexts.submit)),
+                 
             )
           ],
         ),
