@@ -22,6 +22,7 @@ class SignupController extends GetxController {
   final password = TextEditingController();
   final phoneNumber = TextEditingController();
   final address = TextEditingController();
+  final gender = TextEditingController();
   GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
 
   //--SIGNUP
@@ -69,6 +70,7 @@ class SignupController extends GetxController {
         phoneNumber: phoneNumber.text.trim(),
         address: address.text.trim(),
         profilePicture: '',
+        gender: gender.text.trim(),
       );
 
       final userRepository = Get.put(UserRepository());

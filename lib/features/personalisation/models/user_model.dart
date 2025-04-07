@@ -12,6 +12,7 @@ class UserModel {
   String phoneNumber;
   String address;
   String profilePicture;
+  final String gender;
 
   //Constructor for usermodel
   UserModel({
@@ -23,6 +24,7 @@ class UserModel {
     required this.phoneNumber,
     required this.address,
     required this.profilePicture,
+    required this.gender,
   });
 
   //Helper function to get the full name.
@@ -48,14 +50,16 @@ class UserModel {
 
   //Static function to create an empty user model
   static UserModel empty() => UserModel(
-      id: '',
-      firstName: '',
-      lastName: '',
-      userName: '',
-      email: '',
-      phoneNumber: '',
-      address: '',
-      profilePicture: '');
+        id: '',
+        firstName: '',
+        lastName: '',
+        userName: '',
+        email: '',
+        phoneNumber: '',
+        address: '',
+        profilePicture: '',
+        gender: '',
+      );
 
   //convert model to JSON structure for storing data in Firebase
   Map<String, dynamic> toJson() {
@@ -66,7 +70,8 @@ class UserModel {
       'Email': email,
       'PhoneNumber': phoneNumber,
       'Address': address,
-      'ProfilePicture': profilePicture
+      'ProfilePicture': profilePicture,
+      'Gender': gender
     };
   }
 
@@ -84,6 +89,7 @@ class UserModel {
         phoneNumber: data['PhoneNumber'] ?? '',
         address: data['Address'] ?? '',
         profilePicture: data['ProfilePicture'] ?? '',
+        gender: data['Gender'] ?? '',
       );
     } else {
       return UserModel.empty();

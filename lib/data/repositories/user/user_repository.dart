@@ -23,7 +23,7 @@ class UserRepository extends GetxController {
     } on PlatformException catch (e) {
       throw BLBPlatformException(e.code).message;
     } catch (e) {
-      throw "Somethig went wronf please try again";
+      throw "Somethig went wrong please try again";
     }
   }
 }

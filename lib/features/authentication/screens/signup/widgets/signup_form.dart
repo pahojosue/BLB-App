@@ -175,6 +175,37 @@ class BLBSignupForm extends StatelessWidget {
           ),
           const SizedBox(height: BLBSizes.spaceBtwSections),
 
+          //Gender
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 40,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Iconsax.man,
+                      size: 20,
+                    ),
+                    Icon(
+                      Iconsax.woman,
+                      size: 20,
+                    )
+                  ],
+                ),
+              ),
+              Expanded(
+                child: TextFormField(
+                  validator: (value) =>
+                      BLBValidator.validateEmptyText('Gender', value),
+                  controller: controller.gender,
+                  decoration: const InputDecoration(labelText: "Gender"),
+                ),
+              ),
+            ],
+          ),
+
           ///Terms & Conditions Checkbox
           Row(
             children: [
