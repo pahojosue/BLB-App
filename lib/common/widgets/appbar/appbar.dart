@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class BLBAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const BLBAppBar({
+  const BLBAppBar( {
     super.key,
     this.title,
     this.actions,

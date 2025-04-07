@@ -1,6 +1,6 @@
 import 'package:blb/common/widgets/Items/Item_card/blb_search_container.dart';
-import 'package:blb/common/widgets/Items/Item_card/item_card_vertical.dart';
 import 'package:blb/common/widgets/Items/Item_card/search_container_view_model.dart';
+import 'package:blb/common/widgets/Items/item_card_receipt.dart';
 import 'package:blb/common/widgets/appbar/appbar.dart';
 import 'package:blb/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:blb/features/authentication/controllers/onboarding/onboarding_controller.dart';
@@ -36,7 +36,7 @@ class BorrowedItemsScreen extends StatelessWidget {
               ),
             ),
 
-            //Vertical Item Cards
+            //Receipt Item Cards
             SizedBox(height: BLBSizes.spaceBtwSections),
             Padding(
               padding: EdgeInsets.all(BLBSizes.defaultSpace),
@@ -49,7 +49,7 @@ class BorrowedItemsScreen extends StatelessWidget {
                     itemCount: 6,
                     scrollDirection: Axis.vertical,
                     itemBuilder: (_, index) {
-                      return BLBItemCardVertical();
+                      return BLBItemCardReceipt();
                     },
                   ),
                 ],
