@@ -7,6 +7,8 @@ import 'package:blb/features/authentication/screens/settings/layouts/list_tiles/
 import 'package:blb/features/authentication/screens/settings/blb_section_heading.dart';
 import 'package:blb/utils/constants/colors.dart';
 import 'package:blb/utils/constants/sizes.dart';
+import 'package:blb/utils/constants/text_strings.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -16,88 +18,101 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            /// -- Header
-
-            BLBPrimaryHeaderContainer(
-              height: 350,
-              child: Column(
-                children: [
-                  BLBAppBar(
-                      title: Text('Account',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium!
-                              .apply(color: BLBColors.white))),
-
-                  ///User Profile Card
-                  BLBUserProfileTile(
-                      onPressed: () => Get.to(() => const ProfileScreen())),
-                  const SizedBox(height: BLBSizes.spaceBtwSections),
-                ],
-              ),
-            ),
-
-            /// -- Body
-            Padding(
-              padding: EdgeInsets.all(BLBSizes.defaultSpace),
-              child: Column(
-                children: [
-                  /// -- Account Settings
-                  BLBSectionHeading(title: 'Account Settings', buttonTitle: ""),
-                  SizedBox(height: BLBSizes.spaceBtwItems),
-
-                  BlbSettingsMenuTile(
-                    icon: Iconsax.safe_home,
-                    title: 'Addresses',
-                    subtitle: 'Set shopping delivery address',
-                    onTap: () {},
-                  ),
-                  BlbSettingsMenuTile(
-                    icon: Iconsax.notification,
-                    title: 'Notifications',
-                    subtitle: 'Set any kind of notification message',
-                    onTap: () {},
-                  ),
-
-                  /// -- App Settings
-                  SizedBox(height: BLBSizes.spaceBtwSections),
-                  BLBSectionHeading(title: 'App Settings', buttonTitle: ""),
-                  SizedBox(height: BLBSizes.spaceBtwItems),
-
-                  BlbSettingsMenuTile(
-                    icon: Iconsax.location,
-                    title: 'Geolocation',
-                    subtitle: 'Set recommendation based on location',
-                    trailing: Switch(value: true, onChanged: (value) {}),
-                  ),
-
-                  BlbSettingsMenuTile(
-                    icon: Iconsax.image,
-                    title: 'HD Image Quality',
-                    subtitle: 'Set image quality to be seen',
-                    trailing: Switch(value: false, onChanged: (value) {}),
-                  ),
-
-                  /// -- Logout Button
-                  const SizedBox(height: BLBSizes.spaceBtwSections),
-                  SizedBox(
-                    width: double.infinity,
-                    child: OutlinedButton(
-                        onPressed: () =>
-                            AuthenticationRepository.instance.logout(),
-                        child: const Text('Logout')),
-                  ),
-                  const SizedBox(height: BLBSizes.spaceBtwSections * 2.5),
-                ],
-              ),
-            )
-          ],
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      return Scaffold(
+        body: Center(
+          child: Text(
+            BLBTexts.loginRequired,
+            textAlign: TextAlign.center,
+          ),
         ),
-      ),
-    );
+      );
+    } else {
+      return Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              /// -- Header
+
+              BLBPrimaryHeaderContainer(
+                height: 350,
+                child: Column(
+                  children: [
+                    BLBAppBar(
+                        title: Text('Account',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium!
+                                .apply(color: BLBColors.white))),
+
+                    ///User Profile Card
+                    BLBUserProfileTile(
+                        onPressed: () => Get.to(() => const ProfileScreen())),
+                    const SizedBox(height: BLBSizes.spaceBtwSections),
+                  ],
+                ),
+              ),
+
+              /// -- Body
+              Padding(
+                padding: EdgeInsets.all(BLBSizes.defaultSpace),
+                child: Column(
+                  children: [
+                    /// -- Account Settings
+                    BLBSectionHeading(
+                        title: 'Account Settings', buttonTitle: ""),
+                    SizedBox(height: BLBSizes.spaceBtwItems),
+
+                    BlbSettingsMenuTile(
+                      icon: Iconsax.safe_home,
+                      title: 'Addresses',
+                      subtitle: 'Set shopping delivery address',
+                      onTap: () {},
+                    ),
+                    BlbSettingsMenuTile(
+                      icon: Iconsax.notification,
+                      title: 'Notifications',
+                      subtitle: 'Set any kind of notification message',
+                      onTap: () {},
+                    ),
+
+                    /// -- App Settings
+                    SizedBox(height: BLBSizes.spaceBtwSections),
+                    BLBSectionHeading(title: 'App Settings', buttonTitle: ""),
+                    SizedBox(height: BLBSizes.spaceBtwItems),
+
+                    BlbSettingsMenuTile(
+                      icon: Iconsax.location,
+                      title: 'Geolocation',
+                      subtitle: 'Set recommendation based on location',
+                      trailing: Switch(value: true, onChanged: (value) {}),
+                    ),
+
+                    BlbSettingsMenuTile(
+                      icon: Iconsax.image,
+                      title: 'HD Image Quality',
+                      subtitle: 'Set image quality to be seen',
+                      trailing: Switch(value: false, onChanged: (value) {}),
+                    ),
+
+                    /// -- Logout Button
+                    const SizedBox(height: BLBSizes.spaceBtwSections),
+                    SizedBox(
+                      width: double.infinity,
+                      child: OutlinedButton(
+                          onPressed: () =>
+                              AuthenticationRepository.instance.logout(),
+                          child: const Text('Logout')),
+                    ),
+                    const SizedBox(height: BLBSizes.spaceBtwSections * 2.5),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      );
+    }
   }
 }

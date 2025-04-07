@@ -6,7 +6,9 @@ import 'package:blb/data/repositories/item/item_repository.dart';
 import 'package:blb/features/blb_app/controllers/items/item_controller.dart';
 import 'package:blb/utils/constants/image_strings.dart';
 import 'package:blb/utils/constants/sizes.dart';
+import 'package:blb/utils/constants/text_strings.dart';
 import 'package:blb/utils/helpers/helper_functions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -18,103 +20,117 @@ class LendScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(ItemController());
-    return Scaffold(
-      appBar: BLBAppBar(),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(BLBSizes.defaultSpace),
-          child: Form(
-            key: controller.itemFormKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //Image Picker
-                BLBRoundedImage(
-                  imageUrl: controller.imageUrl != ''
-                      ? controller.imageUrl
-                      : BLBImages.user,
-                  height: 200,
-                  width: BLBHelperFunctions.screenWidth(),
-                  backgroundColor: Colors.black,
-                  isNetworkImage: controller.imageUrl == '' ? false : true,
-                ),
-                const SizedBox(height: BLBSizes.spaceBtwItems),
-                //Imagepicker button
-                Row(
-                  children: [
-                    //Pick from gallery
-                    Buttons(
-                        text: "Gallery",
-                        onPressed: () async {
-                          _pickImageGallery(controller);
-                        }),
-                    SizedBox(width: BLBSizes.spaceBtwItems * 8),
-                    //Chose from camera
-                    Buttons(
-                        text: "Camera",
-                        onPressed: () async {
-                          _pickImageCamera(controller);
-                        }),
-                  ],
-                ),
-                const SizedBox(height: BLBSizes.spaceBtwItems),
-                //Item Name
-                FormField(text: "Name", controller: controller.name),
-                const SizedBox(height: BLBSizes.spaceBtwInputFields),
-                //Item description
-                FormField(
-                    text: "Description", controller: controller.description),
-                const SizedBox(height: BLBSizes.spaceBtwInputFields),
-                //Price
-                FormField(
-                    text: "Price", suffix: "XAF", controller: controller.price),
-                const SizedBox(height: BLBSizes.spaceBtwInputFields),
-                //State
-                DropDowns(state: _itemState, controller: controller),
-                const SizedBox(height: BLBSizes.spaceBtwInputFields),
-                //Lending Period
-                FormField(
-                    text: "Lending Period",
-                    suffix: "day(s)",
-                    controller: controller.lendingPeriod),
-                const SizedBox(height: BLBSizes.spaceBtwInputFields),
-                //Allow for bartering or not
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 24,
-                      height: 24,
-                      child: Obx(() => Checkbox(
-                          value: controller.canBeBartered.value,
-                          onChanged: (value) => controller.canBeBartered.value =
-                              !controller.canBeBartered.value)),
-                    ),
-                    const SizedBox(width: BLBSizes.spaceBtwItems),
-                    Text("Allow for Bartering",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: BLBSizes.defaultSpace))
-                  ],
-                ),
-                const SizedBox(height: BLBSizes.spaceBtwSections),
-                //Buttons
-                Row(
-                  children: [
-                    //Cancel Button
-                    Buttons(text: "Cancel", onPressed: () {}),
-                    SizedBox(width: BLBSizes.spaceBtwItems * 8),
-                    //Save Button
-                    Buttons(
-                        text: "Save",
-                        onPressed: () => controller.sendItemDetails()),
-                  ],
-                ),
-              ],
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      return Scaffold(
+        body: Center(
+          child: Text(
+            BLBTexts.loginRequired,
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    } else {
+      return Scaffold(
+        appBar: BLBAppBar(),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(BLBSizes.defaultSpace),
+            child: Form(
+              key: controller.itemFormKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //Image Picker
+                  BLBRoundedImage(
+                    imageUrl: controller.imageUrl != ''
+                        ? controller.imageUrl
+                        : BLBImages.user,
+                    height: 200,
+                    width: BLBHelperFunctions.screenWidth(),
+                    backgroundColor: Colors.black,
+                    isNetworkImage: controller.imageUrl == '' ? false : true,
+                  ),
+                  const SizedBox(height: BLBSizes.spaceBtwItems),
+                  //Imagepicker button
+                  Row(
+                    children: [
+                      //Pick from gallery
+                      Buttons(
+                          text: "Gallery",
+                          onPressed: () async {
+                            _pickImageGallery(controller);
+                          }),
+                      SizedBox(width: BLBSizes.spaceBtwItems * 8),
+                      //Chose from camera
+                      Buttons(
+                          text: "Camera",
+                          onPressed: () async {
+                            _pickImageCamera(controller);
+                          }),
+                    ],
+                  ),
+                  const SizedBox(height: BLBSizes.spaceBtwItems),
+                  //Item Name
+                  FormField(text: "Name", controller: controller.name),
+                  const SizedBox(height: BLBSizes.spaceBtwInputFields),
+                  //Item description
+                  FormField(
+                      text: "Description", controller: controller.description),
+                  const SizedBox(height: BLBSizes.spaceBtwInputFields),
+                  //Price
+                  FormField(
+                      text: "Price",
+                      suffix: "XAF",
+                      controller: controller.price),
+                  const SizedBox(height: BLBSizes.spaceBtwInputFields),
+                  //State
+                  DropDowns(state: _itemState, controller: controller),
+                  const SizedBox(height: BLBSizes.spaceBtwInputFields),
+                  //Lending Period
+                  FormField(
+                      text: "Lending Period",
+                      suffix: "day(s)",
+                      controller: controller.lendingPeriod),
+                  const SizedBox(height: BLBSizes.spaceBtwInputFields),
+                  //Allow for bartering or not
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: Obx(() => Checkbox(
+                            value: controller.canBeBartered.value,
+                            onChanged: (value) => controller.canBeBartered
+                                .value = !controller.canBeBartered.value)),
+                      ),
+                      const SizedBox(width: BLBSizes.spaceBtwItems),
+                      Text("Allow for Bartering",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: BLBSizes.defaultSpace))
+                    ],
+                  ),
+                  const SizedBox(height: BLBSizes.spaceBtwSections),
+                  //Buttons
+                  Row(
+                    children: [
+                      //Cancel Button
+                      Buttons(text: "Cancel", onPressed: () {}),
+                      SizedBox(width: BLBSizes.spaceBtwItems * 8),
+                      //Save Button
+                      Buttons(
+                          text: "Save",
+                          onPressed: () => controller.sendItemDetails()),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-      ),
-    );
+      );
+    }
   }
 
   Future<void> _pickImageGallery(ItemController controller) async {

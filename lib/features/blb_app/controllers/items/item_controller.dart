@@ -1,4 +1,5 @@
 import 'package:blb/data/repositories/item/item_repository.dart';
+import 'package:blb/features/authentication/screens/login/login.dart';
 import 'package:blb/features/personalisation/models/item_model.dart';
 import 'package:blb/utils/constants/image_strings.dart';
 import 'package:blb/utils/helpers/network_manager.dart';
@@ -49,6 +50,13 @@ class ItemController extends GetxController {
       }
 
       final user = _auth.currentUser;
+      if (user == null) {
+        BLBFullScreenLoader.stopLoading();
+        Get.offAll(() => LoginScreen());
+        BLBLoaders.warningSnackBar(
+            title: "Not a user", message: "You must be login to lend an item");
+        return;
+      }
       //Save the Item details in the firebase
       final newItem = ItemModel(
           id: '',
@@ -58,7 +66,7 @@ class ItemController extends GetxController {
           price: price.text.trim(),
           state: state,
           lendingPeriod: lendingPeriod.text.trim(),
-          ownerId: user!.uid,
+          ownerId: user.uid,
           borrowerId: '',
           category: '',
           canBeBartered: canBeBartered.value);
@@ -74,7 +82,7 @@ class ItemController extends GetxController {
           title: "Congratulations",
           message: "The item has been successfully saved");
 
-      //Move to Verify Email Screen
+      //Move to Lending Page
     } catch (e, stacktrace) {
       // Catch any error and show it
       BLBFullScreenLoader.stopLoading();
