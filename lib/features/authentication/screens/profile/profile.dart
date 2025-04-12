@@ -1,10 +1,13 @@
 import 'package:blb/common/widgets/appbar/appbar.dart';
+import 'package:blb/features/authentication/screens/profile/change_name.dart';
 import 'package:blb/features/authentication/screens/profile/profile_menu.dart';
 import 'package:blb/features/authentication/screens/settings/blb_circular_images.dart';
 import 'package:blb/features/authentication/screens/settings/blb_section_heading.dart';
+import 'package:blb/features/personalisation/controllers/user_controller.dart';
 import 'package:blb/utils/constants/image_strings.dart';
 import 'package:blb/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -12,6 +15,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = UserController.instance;
     return Scaffold(
       appBar: BLBAppBar(showBackArrow: true, title: Text('Profile')),
 
@@ -43,8 +47,8 @@ class ProfileScreen extends StatelessWidget {
                     const BLBSectionHeading(title: 'Profile Information', showActionButton: false),
                     const SizedBox(height: BLBSizes.spaceBtwItems),     
 
-                    BLBProfileMenu(title: 'Name', value: 'Coding with BLB', onPressed: () {}),    
-                    BLBProfileMenu(title: 'Username', value: 'Coding with BLB', onPressed: () {}),
+                    BLBProfileMenu(title: 'Name', value: controller.user.value.fullName, onPressed: () => Get.to(() => const ChangeName())),    
+                    BLBProfileMenu(title: 'Username', value: controller.user.value.userName, onPressed: () {}),
 
                     const SizedBox(height: BLBSizes.spaceBtwItems),
                     const Divider(),
@@ -54,9 +58,9 @@ class ProfileScreen extends StatelessWidget {
                     const BLBSectionHeading(title: 'Personal Information', showActionButton: false),
                     const SizedBox(height: BLBSizes.spaceBtwItems),
 
-                    BLBProfileMenu(title: 'User ID', value: '45689', icon: Iconsax.copy, onPressed: () {}),    
-                    BLBProfileMenu(title: 'E-mail', value: 'Coding_with_blb', onPressed: () {}),
-                    BLBProfileMenu(title: 'Phone Number', value: '+92-317-8059528', onPressed: () {}),    
+                    BLBProfileMenu(title: 'User ID', value:controller.user.value.id, icon: Iconsax.copy, onPressed: () {}),    
+                    BLBProfileMenu(title: 'E-mail', value: controller.user.value.email, onPressed: () {}),
+                    BLBProfileMenu(title: 'Phone Number', value: controller.user.value.phoneNumber, onPressed: () {}),    
                     BLBProfileMenu(title: 'Gender', value: 'Male', onPressed: () {}),
                     BLBProfileMenu(title: 'Date of Birth', value: '10 Oct, 1994', onPressed: () {}),    
                     const Divider(),
@@ -64,7 +68,7 @@ class ProfileScreen extends StatelessWidget {
 
                     Center(
                       child: TextButton(
-                        onPressed: () {}, 
+                        onPressed: () => controller.deleteAccountWarningPopup(), 
                         child: const Text('Close Account', style: TextStyle(color: Colors.red)),
                         ),
                     )

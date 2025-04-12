@@ -1,3 +1,4 @@
+import 'package:blb/data/repositories/user/user_repository.dart';
 import 'package:blb/features/authentication/screens/login/login.dart';
 import 'package:blb/features/authentication/screens/signup/widgets/verify_email.dart';
 import 'package:blb/navigation_menu.dart';
@@ -21,6 +22,9 @@ class AuthenticationRepository extends GetxController {
   final deviceStorage = GetStorage();
   final _auth = FirebaseAuth.instance;
 
+  /// Get Authenticated User
+  User? get authUser => _auth.currentUser;
+
   //Called from main.dart on app launch
   @override
   void onReady() {
@@ -36,7 +40,7 @@ class AuthenticationRepository extends GetxController {
   }
 
   //Function to show relevant screen
-  screenRedirect() async {
+   void screenRedirect() async {
     final user = _auth.currentUser;
     if (user != null) {
       if (user.emailVerified) {
@@ -117,6 +121,24 @@ class AuthenticationRepository extends GetxController {
   }
 
   //[ReAuthentication] - ReAuthenticate User
+  Future<void> reAuthenticateWithEmailAndPassword(String email, String password) async {
+    try {
+      /// Create a credential
+      AuthCredential credential = EmailAuthProvider.credential(email: email, password: password);
+      /// Reauthenticate the user
+      await _auth.currentUser!.reauthenticateWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      throw BLBFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw BLBFirebaseAuthException(e.code).message;
+    } on FormatException catch (_) {
+      throw const BLBFormatException();
+    } on PlatformException catch (e) {
+      throw BLBPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
 
   //[EmailAuthentication] - FORGOT PASSWORD
 
@@ -190,4 +212,20 @@ class AuthenticationRepository extends GetxController {
   }
 
   //[DeleteUser] - Remove user Auth and Firestore Account.
+  Future<void> deleteAccount() async {
+    try {
+      await UserRepository.instance.removeUserRecord(_auth.currentUser!.uid);
+      await _auth.currentUser?.delete();
+    } on FirebaseAuthException catch (e) {
+      throw BLBFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw BLBFirebaseAuthException(e.code).message;
+    } on FormatException catch (_) {
+      throw const BLBFormatException();
+    } on PlatformException catch (e) {
+      throw BLBPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
 }

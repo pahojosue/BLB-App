@@ -1,9 +1,12 @@
 import 'package:blb/common/widgets/appbar/appbar.dart';
 import 'package:blb/common/widgets/appbar/notifications_menu_icon.dart';
 import 'package:blb/features/blb_app/screens/Notifications/notifications.dart';
+import 'package:blb/features/blb_app/screens/home/widgets/shimmer.dart';
 import 'package:blb/features/blb_app/screens/wishlist/wishlist.dart';
+import 'package:blb/features/personalisation/controllers/user_controller.dart';
 import 'package:blb/utils/constants/colors.dart';
 import 'package:blb/utils/constants/sizes.dart';
+import 'package:blb/utils/constants/text_strings.dart';
 import 'package:blb/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,12 +19,26 @@ class BLBHomeAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(UserController());
     final dark = BLBHelperFunctions.isDarkMode(context);
     return BLBAppBar(
       showBackArrow: false,
+    
       title: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+Text(BLBTexts.homeAppbarTitle, style: Theme.of(context).textTheme.labelMedium!.apply(color:BLBColors.grey)),
+         Obx(() {
+          if (controller.profileLoading.value) {
+            return const BLBShimmerEffect(height: 15, width: 80);
+          } else {
+            return Text(controller.user.value.fullName, style: Theme.of(context).textTheme.headlineSmall!.apply(color:BLBColors.white));
+          }
+       
+  }),
+      
+
+
           //SearchBar
           Expanded(
             child: Padding(

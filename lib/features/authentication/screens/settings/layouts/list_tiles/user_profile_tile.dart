@@ -1,5 +1,6 @@
 import 'package:blb/features/authentication/screens/profile/profile.dart';
 import 'package:blb/features/authentication/screens/settings/blb_circular_images.dart';
+import 'package:blb/features/personalisation/controllers/user_controller.dart';
 import 'package:blb/utils/constants/colors.dart';
 import 'package:blb/utils/constants/image_strings.dart';
 import 'package:flutter/material.dart';
@@ -15,15 +16,16 @@ class BLBUserProfileTile extends StatelessWidget {
   final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {
+    final controller = UserController.instance;
     return ListTile(
       leading: const BLBCircularImages(
           image: BLBImages.user, width: 50, height: 50, padding: 0),
-      title: Text('Coding with BLB',
+      title: Text(controller.user.value.fullName,
           style: Theme.of(context)
               .textTheme
               .headlineSmall!
               .apply(color: BLBColors.white)),
-      subtitle: Text('support@codingwithBLB.com',
+      subtitle: Text(controller.user.value.email,
           style: Theme.of(context)
               .textTheme
               .bodyMedium!
