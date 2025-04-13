@@ -20,6 +20,7 @@ class LendScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(ItemController());
+    controller.cleanScreen();
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) {
       return Scaffold(

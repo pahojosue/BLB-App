@@ -13,22 +13,23 @@ class ItemModel {
   String ownerId;
   String borrowerId;
   String category;
+  String nameLowercase;
   final bool canBeBartered;
 
   //Constructor for itemModel
-  ItemModel({
-    required this.id,
-    required this.name,
-    required this.description,
-    required this.imageUrl,
-    required this.price,
-    required this.state,
-    required this.lendingPeriod,
-    required this.ownerId,
-    required this.borrowerId,
-    required this.category,
-    required this.canBeBartered,
-  });
+  ItemModel(
+      {required this.id,
+      required this.name,
+      required this.description,
+      required this.imageUrl,
+      required this.price,
+      required this.state,
+      required this.lendingPeriod,
+      required this.ownerId,
+      required this.borrowerId,
+      required this.category,
+      required this.canBeBartered,
+      required this.nameLowercase});
 
   //Static function to create an empty user model
   static ItemModel empty() => ItemModel(
@@ -43,6 +44,7 @@ class ItemModel {
         borrowerId: '',
         category: '',
         canBeBartered: false,
+        nameLowercase: '',
       );
 
   //convert model to JSON structure for storing data in Firebase
@@ -58,37 +60,38 @@ class ItemModel {
       'ownerID': ownerId,
       'borrowerID': borrowerId,
       'itemCategory': category,
-      'canBeBartered': canBeBartered
+      'canBeBartered': canBeBartered,
+      'nameLowercase': nameLowercase
     };
   }
 
   //used to get an item id from firebase
-  ItemModel copyWith({
-    String? id,
-    String? name,
-    String? description,
-    String? imageUrl,
-    String? price,
-    String? state,
-    String? lendingPeriod,
-    String? ownerId,
-    String? borrowerId,
-    String? category,
-    bool? canBeBartered,
-  }) {
+  ItemModel copyWith(
+      {String? id,
+      String? name,
+      String? description,
+      String? imageUrl,
+      String? price,
+      String? state,
+      String? lendingPeriod,
+      String? ownerId,
+      String? borrowerId,
+      String? category,
+      bool? canBeBartered,
+      String? nameLowercase}) {
     return ItemModel(
-      id: id ?? this.id, // Use the passed id or keep the existing one
-      name: name ?? this.name,
-      description: description ?? this.description,
-      imageUrl: imageUrl ?? this.imageUrl,
-      price: price ?? this.price,
-      state: state ?? this.state,
-      lendingPeriod: lendingPeriod ?? this.lendingPeriod,
-      ownerId: ownerId ?? this.ownerId,
-      borrowerId: borrowerId ?? this.borrowerId,
-      category: category ?? this.category,
-      canBeBartered: canBeBartered ?? this.canBeBartered,
-    );
+        id: id ?? this.id, // Use the passed id or keep the existing one
+        name: name ?? this.name,
+        description: description ?? this.description,
+        imageUrl: imageUrl ?? this.imageUrl,
+        price: price ?? this.price,
+        state: state ?? this.state,
+        lendingPeriod: lendingPeriod ?? this.lendingPeriod,
+        ownerId: ownerId ?? this.ownerId,
+        borrowerId: borrowerId ?? this.borrowerId,
+        category: category ?? this.category,
+        canBeBartered: canBeBartered ?? this.canBeBartered,
+        nameLowercase: nameLowercase ?? this.nameLowercase);
   }
 
   //Factory method to create a userModel from a firebase document snapshot
@@ -108,6 +111,7 @@ class ItemModel {
         borrowerId: data['borrowerID'] ?? '',
         category: data['itemCategory'] ?? '',
         canBeBartered: data['canBeBartered'] ?? false,
+        nameLowercase: data['nameLowercase'] ?? '',
       );
     } else {
       return ItemModel.empty();

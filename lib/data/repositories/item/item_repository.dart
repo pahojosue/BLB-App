@@ -91,4 +91,25 @@ class ItemRepository extends GetxController {
       throw 'Something went wrong. Please try again';
     }
   }
+
+  //Get Items depending on searched Item
+  Future<List<ItemModel>> getSearchedItems(String query) async {
+    try {
+      final queryLowercase = query.toLowerCase();
+
+      final snapshot = await _db
+          .collection('Items')
+          .where('nameLowercase', isGreaterThanOrEqualTo: queryLowercase)
+          .where('nameLowercase',
+              isLessThanOrEqualTo: queryLowercase + '\uf8ff')
+          .get();
+      return snapshot.docs.map((e) => ItemModel.fromSnapshot(e)).toList();
+    } on FirebaseException catch (e) {
+      throw BLBFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw BLBPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
 }

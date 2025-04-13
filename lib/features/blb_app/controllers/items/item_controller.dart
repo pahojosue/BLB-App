@@ -27,6 +27,7 @@ class ItemController extends GetxController {
   final ownerId = TextEditingController();
   final borrowerId = TextEditingController();
   final category = TextEditingController();
+  final searchQuery = TextEditingController();
   GlobalKey<FormState> itemFormKey = GlobalKey<FormState>();
 
   RxList<ItemModel> items = <ItemModel>[].obs;
@@ -55,6 +56,42 @@ class ItemController extends GetxController {
     } finally {
       isLoading.value = false;
     }
+  }
+
+  void fetchSearchedItems() async {
+    try {
+      //Show loader while loading the items
+      isLoading.value = true;
+
+      if (searchQuery.text.isEmpty) {
+        fetchItems();
+      } else {
+        //Fetch items
+        final itemsFetched =
+            await itemRepository.getSearchedItems(searchQuery.text.trim());
+
+        //Assign Items
+        items.assignAll(itemsFetched);
+      }
+    } catch (e) {
+      BLBLoaders.errorSnackBar(title: 'Ob Snap', message: e.toString());
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  void cleanScreen() {
+    canBeBartered.value = true;
+    isNetworkImage.value = false;
+    name.clear();
+    description.clear();
+    imageUrl = "";
+    price.clear();
+    state = "";
+    lendingPeriod.clear();
+    ownerId.clear();
+    borrowerId.clear();
+    category.clear();
   }
 
   void setState(String st) {
@@ -89,17 +126,19 @@ class ItemController extends GetxController {
       }
       //Save the Item details in the firebase
       final newItem = ItemModel(
-          id: '',
-          name: name.text.trim(),
-          description: description.text.trim(),
-          imageUrl: imageUrl,
-          price: price.text.trim(),
-          state: state,
-          lendingPeriod: lendingPeriod.text.trim(),
-          ownerId: user.uid,
-          borrowerId: '',
-          category: '',
-          canBeBartered: canBeBartered.value);
+        id: '',
+        name: name.text.trim(),
+        description: description.text.trim(),
+        imageUrl: imageUrl,
+        price: price.text.trim(),
+        state: state,
+        lendingPeriod: lendingPeriod.text.trim(),
+        ownerId: user.uid,
+        borrowerId: '',
+        category: '',
+        canBeBartered: canBeBartered.value,
+        nameLowercase: name.text.trim().toLowerCase(),
+      );
 
       await itemRepository.saveUserRecord(newItem);
 
