@@ -1,5 +1,4 @@
 import 'package:blb/data/repositories/authentication/authentication_repository.dart';
-import 'package:blb/features/personalisation/controllers/user_controller.dart';
 import 'package:blb/utils/constants/image_strings.dart';
 import 'package:blb/utils/helpers/network_manager.dart';
 import 'package:blb/utils/popups/full_screen_loader.dart';
@@ -17,7 +16,7 @@ class LoginController extends GetxController {
   final password = TextEditingController();
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
 
-   googleSignIn() {}
+  googleSignIn() {}
 
   @override
   void onInit() {
@@ -65,39 +64,38 @@ class LoginController extends GetxController {
       BLBLoaders.errorSnackBar(title: "Oups", message: e.toString());
     }
   }
-
 }
 
 /// -- Google SignIn Authentication
 
- Future<void> googleSignIn() async {
-    try {
-      // Start Loading
-      BLBFullScreenLoader.openLoadingDialog('Logging you in...', BLBImages.docerAnimation);
+//  Future<void> googleSignIn() async {
+//     try {
+//       // Start Loading
+//       BLBFullScreenLoader.openLoadingDialog('Logging you in...', BLBImages.docerAnimation);
 
-      //Check Internet Connectivity
-      final isConnected = await NetworkManager.instance.isConnected();
-      if (!isConnected) {
-        BLBFullScreenLoader.stopLoading();
-        return;
-      }
+//       //Check Internet Connectivity
+//       final isConnected = await NetworkManager.instance.isConnected();
+//       if (!isConnected) {
+//         BLBFullScreenLoader.stopLoading();
+//         return;
+//       }
 
-      // Google Authentication
-      final userCredentials = await AuthenticationRepository.instance.signInWithGoogle();
+//       // Google Authentication
+//       final userCredentials = await AuthenticationRepository.instance.signInWithGoogle();
 
-      // Save User Record
-      await UserController.instance.saveUserRecord(userCredentials);
+//       // Save User Record
+//       await UserController.instance.saveUserRecord(userCredentials);
 
-      // Remove Loader
-      BLBFullScreenLoader.stopLoading();
+//       // Remove Loader
+//       BLBFullScreenLoader.stopLoading();
 
-      // Redirect
-      AuthenticationRepository.instance.screenRedirect();
+//       // Redirect
+//       AuthenticationRepository.instance.screenRedirect();
 
-    } catch (e){
-      BLBFullScreenLoader.stopLoading();
-      BLBLoaders.errorSnackBar(title: 'Oups!', message: e.toString());
+//     } catch (e){
+//       BLBFullScreenLoader.stopLoading();
+//       BLBLoaders.errorSnackBar(title: 'Oups!', message: e.toString());
 
       
-    }
-  }
+//     }
+//   }

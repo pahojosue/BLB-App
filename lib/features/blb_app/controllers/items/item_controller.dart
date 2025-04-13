@@ -1,6 +1,8 @@
 import 'package:blb/data/repositories/item/item_repository.dart';
+import 'package:blb/data/repositories/user/user_repository.dart';
 import 'package:blb/features/authentication/screens/login/login.dart';
 import 'package:blb/features/personalisation/models/item_model.dart';
+import 'package:blb/features/personalisation/models/user_model.dart';
 import 'package:blb/utils/constants/image_strings.dart';
 import 'package:blb/utils/helpers/network_manager.dart';
 import 'package:blb/utils/popups/full_screen_loader.dart';
@@ -26,6 +28,34 @@ class ItemController extends GetxController {
   final borrowerId = TextEditingController();
   final category = TextEditingController();
   GlobalKey<FormState> itemFormKey = GlobalKey<FormState>();
+
+  RxList<ItemModel> items = <ItemModel>[].obs;
+  final isLoading = false.obs;
+  final itemRepository = Get.put(ItemRepository());
+  final userRepository = UserRepository.instance;
+
+  @override
+  void onInit() {
+    fetchItems();
+    super.onInit();
+  }
+
+  void fetchItems() async {
+    try {
+      //Show loader while loading the items
+      isLoading.value = true;
+
+      //Fetch items
+      final itemsFetched = await itemRepository.getItems();
+
+      //Assign Items
+      items.assignAll(itemsFetched);
+    } catch (e) {
+      BLBLoaders.errorSnackBar(title: 'Ob Snap', message: e.toString());
+    } finally {
+      isLoading.value = false;
+    }
+  }
 
   void setState(String st) {
     state = st;
@@ -71,7 +101,6 @@ class ItemController extends GetxController {
           category: '',
           canBeBartered: canBeBartered.value);
 
-      final itemRepository = Get.put(ItemRepository());
       await itemRepository.saveUserRecord(newItem);
 
       //Remove Loader
@@ -83,15 +112,23 @@ class ItemController extends GetxController {
           message: "The item has been successfully saved");
 
       //Move to Lending Page
-    } catch (e, stacktrace) {
+    } catch (e) {
       // Catch any error and show it
       BLBFullScreenLoader.stopLoading();
-      print("Error: $e");
-      print("Stacktrace: $stacktrace");
       BLBLoaders.errorSnackBar(
         title: "Oops!",
         message: "Something went wrong: ${e.toString()}",
       );
     }
+  }
+
+  Future<String> getLenderName(String id) async {
+    UserModel user = await userRepository.fetchLenderDetails(id);
+    return user.userName;
+  }
+
+  Future<String> getLenderAddress(String id) async {
+    UserModel user = await userRepository.fetchLenderDetails(id);
+    return user.address;
   }
 }

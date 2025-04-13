@@ -18,8 +18,16 @@ class BLBUserProfileTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = UserController.instance;
     return ListTile(
-      leading: const BLBCircularImages(
-          image: BLBImages.user, width: 50, height: 50, padding: 0),
+      leading: Obx(() {
+        final networkImage = controller.user.value.profilePicture;
+        final image = networkImage.isNotEmpty ? networkImage : BLBImages.user;
+        return BLBCircularImages(
+          image: image,
+          width: 50,
+          height: 50,
+          isNetworkImage: networkImage.isNotEmpty,
+        );
+      }),
       title: Text(controller.user.value.fullName,
           style: Theme.of(context)
               .textTheme

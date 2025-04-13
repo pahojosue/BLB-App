@@ -2,6 +2,7 @@ import 'package:blb/common/styles/shadows.dart';
 import 'package:blb/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:blb/common/widgets/images/blb_rounded_image.dart';
 import 'package:blb/features/blb_app/screens/home/screens/item_details/item_details.dart';
+import 'package:blb/features/personalisation/models/item_model.dart';
 import 'package:blb/utils/constants/colors.dart';
 import 'package:blb/utils/constants/image_strings.dart';
 import 'package:blb/utils/constants/sizes.dart';
@@ -16,7 +17,7 @@ class BLBItemCardHorizontal extends StatelessWidget {
   Widget build(BuildContext context) {
     final dark = BLBHelperFunctions.isDarkMode(context);
     return GestureDetector(
-      onTap: () => Get.to(() => ItemDetails()),
+      onTap: () => Get.to(() => ItemDetails(item: ItemModel.empty())),
       child: Container(
         width: BLBHelperFunctions.screenWidth(),
         padding: const EdgeInsets.all(1),

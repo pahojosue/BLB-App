@@ -5,7 +5,7 @@ class BLBChipTheme {
   BLBChipTheme._();
 
   static ChipThemeData lightChipTheme = ChipThemeData(
-    disabledColor: BLBColors.grey.withOpacity(0.4),
+    disabledColor: BLBColors.grey.withValues(alpha: 0.4),
     labelStyle: const TextStyle(color: BLBColors.black),
     selectedColor: BLBColors.primary,
     padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12),

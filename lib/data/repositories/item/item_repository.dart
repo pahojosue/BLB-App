@@ -15,7 +15,7 @@ class ItemRepository extends GetxController {
   static ItemRepository get instance => Get.find();
 
   final FirebaseFirestore _db = FirebaseFirestore.instance;
- 
+
   //Function to save user data to Firestore
   Future<void> saveUserRecord(ItemModel item) async {
     try {
@@ -75,6 +75,20 @@ class ItemRepository extends GetxController {
       throw BLBPlatformException(e.code).message;
     } catch (e) {
       throw "Somethig went wrong please try again";
+    }
+  }
+
+  //Get the Items from Firebase
+  Future<List<ItemModel>> getItems() async {
+    try {
+      final snapshot = await _db.collection('Items').get();
+      return snapshot.docs.map((e) => ItemModel.fromSnapshot(e)).toList();
+    } on FirebaseException catch (e) {
+      throw BLBFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw BLBPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
     }
   }
 }

@@ -1,7 +1,5 @@
-import 'package:blb/common/widgets/appbar/appbar.dart';
 import 'package:blb/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:blb/common/widgets/images/blb_rounded_image.dart';
-import 'package:blb/features/blb_app/screens/home/screens/item_details/item_details.dart';
 import 'package:blb/features/blb_app/screens/home/screens/item_details/item_details_receipt.dart';
 import 'package:blb/utils/constants/colors.dart';
 import 'package:blb/utils/constants/image_strings.dart';
@@ -18,16 +16,10 @@ class BLBItemCardReceipt extends StatelessWidget {
   Widget build(BuildContext context) {
     final dark = BLBHelperFunctions.isDarkMode(context);
     return GestureDetector(
-      
       onTap: () => Get.to(() => const ItemDetailsReceipt()),
-
-      
-      
       child: Padding(
-        
         padding: EdgeInsets.only(bottom: BLBSizes.spaceBtwItems),
         child: Container(
-          
           width: BLBHelperFunctions.screenWidth(),
           padding: const EdgeInsets.all(1),
           decoration: BoxDecoration(
@@ -35,8 +27,6 @@ class BLBItemCardReceipt extends StatelessWidget {
             borderRadius: BorderRadius.circular(BLBSizes.productImageRadius),
             color: dark ? BLBColors.darkGrey : BLBColors.white,
           ),
-
-          
           child: Column(
             children: [
               //Thumbnail (Image)
@@ -47,15 +37,11 @@ class BLBItemCardReceipt extends StatelessWidget {
                 backgroundColor: dark ? BLBColors.dark : BLBColors.light,
                 child: Stack(
                   children: [
-                    
                     //Thumbnail Image
                     Center(
-                      
                       child: const BLBRoundedImage(
                           imageUrl: BLBImages.appLogo, applyImageRadius: true),
                     ),
-
-               
                   ],
                 ),
               ),

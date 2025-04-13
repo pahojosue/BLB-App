@@ -136,15 +136,15 @@ class LendScreen extends StatelessWidget {
   Future<void> _pickImageGallery(ItemController controller) async {
     final repository = Get.put(ItemRepository());
     String imageUrl = '';
-    File? _image;
+    File? imageFile;
     final image = await ImagePicker().pickImage(
         source: ImageSource.gallery,
         imageQuality: 70,
         maxHeight: 512,
         maxWidth: 512);
     if (image != null) {
-      _image = File(image.path);
-      imageUrl = await repository.uploadImage(_image);
+      imageFile = File(image.path);
+      imageUrl = await repository.uploadImage(imageFile);
       controller.setImageUrl(imageUrl);
     }
   }
@@ -152,15 +152,15 @@ class LendScreen extends StatelessWidget {
   Future<void> _pickImageCamera(ItemController controller) async {
     final repository = Get.put(ItemRepository());
     String imageUrl = '';
-    File? _image;
+    File? imageFile;
     final image = await ImagePicker().pickImage(
         source: ImageSource.camera,
         imageQuality: 70,
         maxHeight: 512,
         maxWidth: 512);
     if (image != null) {
-      _image = File(image.path);
-      imageUrl = await repository.uploadImage(_image);
+      imageFile = File(image.path);
+      imageUrl = await repository.uploadImage(imageFile);
       controller.setImageUrl(imageUrl);
     }
   }

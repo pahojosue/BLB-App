@@ -21,8 +21,8 @@ class BLBLoaders {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
             color: BLBHelperFunctions.isDarkMode(Get.context!)
-                ? BLBColors.darkerGrey.withOpacity(0.9)
-                : BLBColors.grey.withOpacity(0.9),
+                ? BLBColors.darkerGrey.withValues(alpha: 0.9)
+                : BLBColors.grey.withValues(alpha: 0.9),
           ),
           child: Center(
               child: Text(message,

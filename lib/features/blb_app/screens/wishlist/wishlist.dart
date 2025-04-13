@@ -1,11 +1,12 @@
 import 'package:blb/common/widgets/Items/Item_card/item_card_vertical.dart';
 import 'package:blb/common/widgets/appbar/appbar.dart';
+import 'package:blb/features/personalisation/models/item_model.dart';
 import 'package:blb/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 class FavouriteScreen extends StatelessWidget {
-  const FavouriteScreen({super.key});
-
+  const FavouriteScreen({super.key, required this.item});
+  final ItemModel item;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +32,7 @@ class FavouriteScreen extends StatelessWidget {
                 itemCount: 6,
                 scrollDirection: Axis.vertical,
                 itemBuilder: (_, index) {
-                  return BLBItemCardVertical();
+                  return BLBItemCardVertical(item: item);
                 },
               ),
             ],

@@ -1,9 +1,10 @@
 import 'package:blb/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:blb/common/widgets/icons/blb_circular_icon.dart';
 import 'package:blb/common/widgets/images/blb_rounded_image.dart';
+import 'package:blb/features/blb_app/controllers/items/item_controller.dart';
 import 'package:blb/features/blb_app/screens/home/screens/item_details/item_details.dart';
+import 'package:blb/features/personalisation/models/item_model.dart';
 import 'package:blb/utils/constants/colors.dart';
-import 'package:blb/utils/constants/image_strings.dart';
 import 'package:blb/utils/constants/sizes.dart';
 import 'package:blb/utils/helpers/helper_functions.dart';
 import 'package:blb/common/styles/shadows.dart';
@@ -12,13 +13,15 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class BLBItemCardVertical extends StatelessWidget {
-  const BLBItemCardVertical({super.key});
+  const BLBItemCardVertical({super.key, required this.item});
+  final ItemModel item;
 
   @override
   Widget build(BuildContext context) {
+    final controller = ItemController.instance;
     final dark = BLBHelperFunctions.isDarkMode(context);
     return GestureDetector(
-      onTap: () => Get.to(() => const ItemDetails()),
+      onTap: () => Get.to(() => ItemDetails(item: item)),
       child: Padding(
         padding: EdgeInsets.only(bottom: BLBSizes.spaceBtwItems),
         child: Container(
@@ -41,8 +44,10 @@ class BLBItemCardVertical extends StatelessWidget {
                   children: [
                     //Thumbnail Image
                     Center(
-                      child: const BLBRoundedImage(
-                          imageUrl: BLBImages.appLogo, applyImageRadius: true),
+                      child: BLBRoundedImage(
+                          imageUrl: item.imageUrl,
+                          applyImageRadius: true,
+                          isNetworkImage: true),
                     ),
 
                     //Favorite Icon Button
@@ -63,7 +68,7 @@ class BLBItemCardVertical extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "<<Item Name>>",
+                      item.name,
                       style: Theme.of(context).textTheme.headlineSmall,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
@@ -72,10 +77,15 @@ class BLBItemCardVertical extends StatelessWidget {
                     SizedBox(height: BLBSizes.spaceBtwItems / 2),
                     Row(
                       children: [
-                        Text("<<Lender Name>>",
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            style: Theme.of(context).textTheme.labelLarge),
+                        // Text(name,
+                        //     overflow: TextOverflow.ellipsis,
+                        //     maxLines: 1,
+                        //     style: Theme.of(context).textTheme.labelLarge),
+                        FutureBuilder(
+                            future: controller.getLenderName(item.ownerId),
+                            builder: (context, snapshot) {
+                              return Text(snapshot.data.toString());
+                            }),
                         const SizedBox(width: BLBSizes.xs),
                       ],
                     ),
@@ -84,7 +94,7 @@ class BLBItemCardVertical extends StatelessWidget {
                       children: [
                         //Price
                         Text(
-                          "500 XAF",
+                          "${item.price} XAF",
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.headlineMedium,

@@ -1,30 +1,22 @@
 import 'package:blb/common/widgets/appbar/appbar.dart';
 import 'package:blb/utils/constants/sizes.dart';
-import 'package:blb/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
-
 
 class ItemDetailsReceipt extends StatelessWidget {
   const ItemDetailsReceipt({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final isDark = BLBHelperFunctions.isDarkMode(context);
     return Scaffold(
-      
       body: SingleChildScrollView(
         child: Column(
           children: [
-
             //Appbar Icons
-                    BLBAppBar(
-                      showBackArrow: true,
-                      title: Text("Item's Receipt",
-                          style: Theme.of(context).textTheme.headlineMedium),
-                          
-                    ),
-                    
-          
+            BLBAppBar(
+              showBackArrow: true,
+              title: Text("Item's Receipt",
+                  style: Theme.of(context).textTheme.headlineMedium),
+            ),
 
             //Item details
             Padding(
@@ -40,13 +32,13 @@ class ItemDetailsReceipt extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       //Title
-                       Text("<<Item ID>>",
+                      Text("<<Item ID>>",
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: Theme.of(context).textTheme.headlineSmall),
 
                       const SizedBox(height: BLBSizes.spaceBtwItems),
-                       Text("<<Item Name>>",
+                      Text("<<Item Name>>",
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: Theme.of(context).textTheme.headlineSmall),
@@ -94,7 +86,7 @@ class ItemDetailsReceipt extends StatelessWidget {
                   ),
 
                   const SizedBox(height: BLBSizes.spaceBtwSections),
-                  
+
                   const SizedBox(
                       height: 75,
                       child: Text(
@@ -106,7 +98,7 @@ class ItemDetailsReceipt extends StatelessWidget {
               ),
             ),
 
-              Padding(
+            Padding(
               padding: EdgeInsets.only(
                   right: BLBSizes.defaultSpace,
                   left: BLBSizes.defaultSpace,
@@ -120,7 +112,7 @@ class ItemDetailsReceipt extends StatelessWidget {
                     children: [
                       //Title
 
-                       Center(
+                      Center(
                         child: Text('Lent to:',
                             style: Theme.of(context).textTheme.headlineMedium),
                       ),
@@ -153,12 +145,11 @@ class ItemDetailsReceipt extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: BLBSizes.spaceBtwItems),
-                     
                     ],
                   ),
 
                   const SizedBox(height: BLBSizes.spaceBtwSections),
-                  
+
                   const SizedBox(
                       height: 75,
                       child: Text(

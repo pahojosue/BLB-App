@@ -15,8 +15,8 @@ class BLBTextFormFieldTheme {
     hintStyle: const TextStyle()
         .copyWith(fontSize: BLBSizes.fontSizeSm, color: BLBColors.black),
     errorStyle: const TextStyle().copyWith(fontStyle: FontStyle.normal),
-    floatingLabelStyle:
-        const TextStyle().copyWith(color: BLBColors.black.withOpacity(0.8)),
+    floatingLabelStyle: const TextStyle()
+        .copyWith(color: BLBColors.black.withValues(alpha: 0.8)),
     border: const OutlineInputBorder().copyWith(
       borderRadius: BorderRadius.circular(BLBSizes.inputFieldRadius),
       borderSide: const BorderSide(width: 1, color: BLBColors.grey),
@@ -48,8 +48,8 @@ class BLBTextFormFieldTheme {
         .copyWith(fontSize: BLBSizes.fontSizeMd, color: BLBColors.white),
     hintStyle: const TextStyle()
         .copyWith(fontSize: BLBSizes.fontSizeSm, color: BLBColors.white),
-    floatingLabelStyle:
-        const TextStyle().copyWith(color: BLBColors.white.withOpacity(0.8)),
+    floatingLabelStyle: const TextStyle()
+        .copyWith(color: BLBColors.white.withValues(alpha: 0.8)),
     border: const OutlineInputBorder().copyWith(
       borderRadius: BorderRadius.circular(BLBSizes.inputFieldRadius),
       borderSide: const BorderSide(width: 1, color: BLBColors.darkGrey),

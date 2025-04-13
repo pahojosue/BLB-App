@@ -1,7 +1,8 @@
 import 'package:blb/common/widgets/appbar/appbar.dart';
 import 'package:blb/common/widgets/icons/blb_circular_icon.dart';
+import 'package:blb/features/blb_app/controllers/items/item_controller.dart';
+import 'package:blb/features/personalisation/models/item_model.dart';
 import 'package:blb/utils/constants/colors.dart';
-import 'package:blb/utils/constants/image_strings.dart';
 import 'package:blb/utils/constants/sizes.dart';
 import 'package:blb/utils/constants/text_strings.dart';
 import 'package:blb/utils/helpers/helper_functions.dart';
@@ -11,12 +12,14 @@ import 'package:blb/common/widgets/custom_shapes/curved_shapes/curved_edges_widg
 import 'package:iconsax/iconsax.dart';
 
 class ItemDetails extends StatelessWidget {
-  const ItemDetails({super.key});
+  const ItemDetails({super.key, required this.item});
+  final ItemModel item;
 
   @override
   Widget build(BuildContext context) {
     final isDark = BLBHelperFunctions.isDarkMode(context);
     final user = FirebaseAuth.instance.currentUser;
+    final controller = ItemController.instance;
     if (user == null) {
       return Scaffold(
         body: Center(
@@ -28,17 +31,19 @@ class ItemDetails extends StatelessWidget {
       );
     } else {
       return Scaffold(
-        bottomNavigationBar: Padding(
-          padding: EdgeInsets.only(left: 48, right: 48, bottom: 12),
-          child: ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.all(BLBSizes.md),
-                backgroundColor: BLBColors.primary,
-                side: BorderSide(color: Color.fromRGBO(53, 237, 237, 1))),
-            child: const Text("Borrow"),
-          ),
-        ),
+        bottomNavigationBar: user.uid == item.ownerId
+            ? Text("This is your Item")
+            : Padding(
+                padding: EdgeInsets.only(left: 48, right: 48, bottom: 12),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.all(BLBSizes.md),
+                      backgroundColor: BLBColors.primary,
+                      side: BorderSide(color: Color.fromRGBO(53, 237, 237, 1))),
+                  child: const Text("Borrow"),
+                ),
+              ),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -50,14 +55,14 @@ class ItemDetails extends StatelessWidget {
                   child: Stack(
                     children: [
                       //Main Large Image
-                      const SizedBox(
+                      SizedBox(
                           height: 300,
                           child: Padding(
                             padding:
                                 EdgeInsets.all(BLBSizes.productImageRadius * 2),
                             child: Center(
-                                child: Image(
-                                    image: AssetImage(BLBImages.appLogo))),
+                                child:
+                                    Image(image: NetworkImage(item.imageUrl))),
                           )),
 
                       //Appbar Icons
@@ -90,50 +95,69 @@ class ItemDetails extends StatelessWidget {
                       children: [
                         //Title
                         Center(
-                          child: Text('<<Item Name>>',
+                          child: Text(item.name,
                               style:
                                   Theme.of(context).textTheme.headlineMedium),
                         ),
                         const SizedBox(height: BLBSizes.spaceBtwItems),
 
-                        Text("<<Lender Name>>",
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            style: Theme.of(context).textTheme.headlineSmall),
+                        Row(
+                          children: [
+                            Text("Lender's Name: ",
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall),
+                            const SizedBox(width: BLBSizes.spaceBtwItems / 1.5),
+                            FutureBuilder(
+                                future: controller.getLenderName(item.ownerId),
+                                builder: (context, snapshot) {
+                                  return Text(snapshot.data.toString(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineSmall);
+                                }),
+                          ],
+                        ),
 
                         const SizedBox(height: BLBSizes.spaceBtwItems),
                         Row(
                           children: [
-                            Text('<<Address:>>',
+                            Text('Address: ',
                                 style:
                                     Theme.of(context).textTheme.headlineSmall),
                             const SizedBox(width: BLBSizes.spaceBtwItems / 1.5),
-                            Text('<<Address>>',
-                                style:
-                                    Theme.of(context).textTheme.headlineSmall),
+                            FutureBuilder(
+                                future:
+                                    controller.getLenderAddress(item.ownerId),
+                                builder: (context, snapshot) {
+                                  return Text(snapshot.data.toString(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineSmall);
+                                }),
                           ],
                         ),
                         const SizedBox(height: BLBSizes.spaceBtwItems),
                         //Item status
                         Row(
                           children: [
-                            Text('<<Item State : >>',
+                            Text('Item State : ',
                                 style:
                                     Theme.of(context).textTheme.headlineSmall),
                             const SizedBox(width: BLBSizes.spaceBtwItems / 1.5),
-                            Text('<<Fairly used>>',
+                            Text(item.state,
                                 style:
                                     Theme.of(context).textTheme.headlineSmall),
                           ],
                         ),
                         const SizedBox(height: BLBSizes.spaceBtwItems),
-                        Text("Minimum Lending Period :" " <<>>",
+                        Text(
+                            "Minimum Lending Period : ${item.lendingPeriod} day(s)",
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                             style: Theme.of(context).textTheme.headlineSmall),
 
                         const SizedBox(height: BLBSizes.spaceBtwItems),
-                        Text("Price per day :" " XAF",
+                        Text("Price per day : ${item.price} XAF",
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                             style: Theme.of(context).textTheme.headlineSmall),
@@ -145,10 +169,10 @@ class ItemDetails extends StatelessWidget {
                       child: Text("Description",
                           style: Theme.of(context).textTheme.headlineMedium),
                     ),
-                    const SizedBox(
+                    SizedBox(
                         height: 75,
                         child: Text(
-                          "",
+                          item.description,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                         )),
