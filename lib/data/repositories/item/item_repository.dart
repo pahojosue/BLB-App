@@ -81,7 +81,10 @@ class ItemRepository extends GetxController {
   //Get the Items from Firebase
   Future<List<ItemModel>> getItems() async {
     try {
-      final snapshot = await _db.collection('Items').get();
+      final snapshot = await _db
+          .collection('Items')
+          .where('borrowerID', isEqualTo: "")
+          .get();
       return snapshot.docs.map((e) => ItemModel.fromSnapshot(e)).toList();
     } on FirebaseException catch (e) {
       throw BLBFirebaseException(e.code).message;
