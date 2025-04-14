@@ -65,6 +65,23 @@ class ItemModel {
     };
   }
 
+  factory ItemModel.fromJson(Map<String, dynamic> json) {
+    return ItemModel(
+      id: json['itemID'] ?? '',
+      name: json['itemName'] ?? '',
+      description: json['itemDescription'] ?? '',
+      imageUrl: json['imageURL'] ?? '',
+      price: json['itemPrice'] ?? '',
+      state: json['itemState'] ?? '',
+      lendingPeriod: json['lendingPeriod'] ?? '',
+      ownerId: json['ownerID'] ?? '',
+      borrowerId: json['borrowerID'] ?? '',
+      category: json['itemCategory'] ?? '',
+      canBeBartered: json['canBeBartered'] ?? false,
+      nameLowercase: json['nameLowercase'] ?? '',
+    );
+  }
+
   //used to get an item id from firebase
   ItemModel copyWith(
       {String? id,

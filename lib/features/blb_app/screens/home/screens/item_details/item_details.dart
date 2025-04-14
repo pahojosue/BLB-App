@@ -1,6 +1,7 @@
 import 'package:blb/common/widgets/appbar/appbar.dart';
 import 'package:blb/common/widgets/icons/blb_circular_icon.dart';
 import 'package:blb/features/blb_app/controllers/items/item_controller.dart';
+import 'package:blb/features/blb_app/controllers/notifications/notification_controller.dart';
 import 'package:blb/features/personalisation/models/item_model.dart';
 import 'package:blb/utils/constants/colors.dart';
 import 'package:blb/utils/constants/sizes.dart';
@@ -9,6 +10,7 @@ import 'package:blb/utils/helpers/helper_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:blb/common/widgets/custom_shapes/curved_shapes/curved_edges_widget.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ItemDetails extends StatelessWidget {
@@ -20,6 +22,8 @@ class ItemDetails extends StatelessWidget {
     final isDark = BLBHelperFunctions.isDarkMode(context);
     final user = FirebaseAuth.instance.currentUser;
     final controller = ItemController.instance;
+    final notifController = Get.put(NotificationController());
+
     if (user == null) {
       return Scaffold(
         body: Center(
@@ -36,7 +40,8 @@ class ItemDetails extends StatelessWidget {
             : Padding(
                 padding: EdgeInsets.only(left: 48, right: 48, bottom: 12),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () => notifController.sendNotificationDetails(
+                      item.ownerId, item),
                   style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.all(BLBSizes.md),
                       backgroundColor: BLBColors.primary,

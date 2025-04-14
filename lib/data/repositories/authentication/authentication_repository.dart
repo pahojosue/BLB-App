@@ -13,9 +13,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:blb/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-
-
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -166,33 +163,33 @@ class AuthenticationRepository extends GetxController {
   /* --------------------- Federated Identity and social sign-in ---------------------*/
   //[GoogleAuthentication] - Google
 
-   // Future<UserCredential?> signInWithGoogle() async {
-    // try {
-    // Trigger the authentication flow
-   // final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
+  // Future<UserCredential?> signInWithGoogle() async {
+  // try {
+  // Trigger the authentication flow
+  // final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
 
-      // Obtain the auth details from the request
-   // final GoogleSignInAuthentication? googleAuth = await userAccount?.authentication;
+  // Obtain the auth details from the request
+  // final GoogleSignInAuthentication? googleAuth = await userAccount?.authentication;
 
-    // Create a new credential
-      // final credentials = GoogleAuthProvider.credential(accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+  // Create a new credential
+  // final credentials = GoogleAuthProvider.credential(accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
 
-       // Once signed in, return the UserCredential
-      // return await _auth.signInWithCredential(credentials);
+  // Once signed in, return the UserCredential
+  // return await _auth.signInWithCredential(credentials);
 
-    // } on FirebaseAuthException catch (e) {
-      // throw BLBFirebaseAuthException(e.code).message;
-    // } on FirebaseException catch (e) {
-   //   throw BLBFirebaseAuthException(e.code).message;
-    // } on FormatException catch (_) {
-    //   throw const BLBFormatException();
-    // } on PlatformException catch (e) {
-     //  throw BLBPlatformException(e.code).message;
-    // } catch (e) {
-    //  if (kDebugMode) print('Something went wrong: $e');
-     //  return null;
-     // }
-   // }
+  // } on FirebaseAuthException catch (e) {
+  // throw BLBFirebaseAuthException(e.code).message;
+  // } on FirebaseException catch (e) {
+  //   throw BLBFirebaseAuthException(e.code).message;
+  // } on FormatException catch (_) {
+  //   throw const BLBFormatException();
+  // } on PlatformException catch (e) {
+  //  throw BLBPlatformException(e.code).message;
+  // } catch (e) {
+  //  if (kDebugMode) print('Something went wrong: $e');
+  //  return null;
+  // }
+  // }
 
   //[FacebookAuthentication] - Facebook
 
@@ -201,7 +198,6 @@ class AuthenticationRepository extends GetxController {
   //[LogoutUser] - Valid for any Authentication.
   Future<void> logout() async {
     try {
-      await GoogleSignIn().signOut();
       await FirebaseAuth.instance.signOut();
       Get.offAll(() => const LoginScreen());
     } on FirebaseAuthException catch (e) {
