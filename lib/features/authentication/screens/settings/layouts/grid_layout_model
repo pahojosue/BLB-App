@@ -1,0 +1,13 @@
+import 'package:flutter/material.dart';
+
+class BLBGridLayoutModel {
+  final int itemCount;
+  final Widget? Function(BuildContext, int) itemBuilder;
+  final double mainAxisExtent;
+
+  const BLBGridLayoutModel({
+    required this.itemCount,
+    required this.itemBuilder,
+    this.mainAxisExtent = 288,
+  });
+}

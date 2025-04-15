@@ -92,6 +92,22 @@ class ItemRepository extends GetxController {
     }
   }
 
+  //Get Items based on the Query
+  Future<List<ItemModel>> getFavouriteItems(List<String> itemIds) async {
+    try {
+      final snapshot = await _db
+          .collection('Items')
+          .where(FieldPath.documentId,whereIn: itemIds).get();
+      return snapshot.docs.map((querySnapshot) => ItemModel.fromSnapshot(querySnapshot)).toList();
+    } on FirebaseException catch (e) {
+      throw BLBFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw BLBPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
+
   //Get Items depending on searched Item
   Future<List<ItemModel>> getSearchedItems(String query) async {
     try {

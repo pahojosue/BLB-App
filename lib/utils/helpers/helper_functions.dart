@@ -1,3 +1,5 @@
+import 'package:blb/features/blb_app/screens/wishlist/vertical_item_shimmer.dart';
+import 'package:blb/features/personalisation/models/item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -106,4 +108,6 @@ class BLBHelperFunctions {
     }
     return wrappedList;
   }
+
+  static checkMultiRecordState({required AsyncSnapshot<List<ItemModel>> snapshot, required BLBVerticalItemShimmer loader, required nothingFound}) {}
 }

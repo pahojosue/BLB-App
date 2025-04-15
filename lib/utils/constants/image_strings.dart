@@ -270,5 +270,7 @@ class BLBImages {
   static const String successfulPaymentIcon =
       "assets/icons/payment_methods/successful_payment_icon.png";
 
+  static var pencilAnimation;
+
   get promoBannerImages => null;
 }

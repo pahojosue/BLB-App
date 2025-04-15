@@ -1,5 +1,6 @@
 import 'package:blb/common/styles/shadows.dart';
 import 'package:blb/common/widgets/custom_shapes/containers/rounded_container.dart';
+import 'package:blb/common/widgets/icons/favourite_icon.dart';
 import 'package:blb/common/widgets/images/blb_rounded_image.dart';
 import 'package:blb/features/blb_app/screens/home/screens/item_details/item_details.dart';
 import 'package:blb/features/personalisation/models/item_model.dart';
@@ -41,6 +42,12 @@ class BLBItemCardHorizontal extends StatelessWidget {
               ),
             ),
 
+          /// --Favourite Icon Button
+           Positioned(
+              top: 0,
+              right: 0,
+              child: BLBFavouriteIcon(itemId: ''),
+            ),
             //Item details
             Padding(
               padding: EdgeInsets.only(top: BLBSizes.sm, left: BLBSizes.sm),

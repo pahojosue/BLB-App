@@ -1,5 +1,6 @@
 import 'package:blb/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:blb/common/widgets/icons/blb_circular_icon.dart';
+import 'package:blb/common/widgets/icons/favourite_icon.dart';
 import 'package:blb/common/widgets/images/blb_rounded_image.dart';
 import 'package:blb/features/blb_app/controllers/items/item_controller.dart';
 import 'package:blb/features/blb_app/screens/home/screens/item_details/item_details.dart';
@@ -54,8 +55,8 @@ class BLBItemCardVertical extends StatelessWidget {
                     Positioned(
                         top: 0,
                         right: 0,
-                        child: const BLBCircularIcon(
-                            icon: Iconsax.heart5, color: Colors.red)),
+                        child: BLBFavouriteIcon(itemId: item.id),
+                    ),
                   ],
                 ),
               ),

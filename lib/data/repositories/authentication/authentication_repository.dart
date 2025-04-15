@@ -6,6 +6,7 @@ import 'package:blb/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:blb/utils/exceptions/firebase_exceptions.dart';
 import 'package:blb/utils/exceptions/format_exceptions.dart';
 import 'package:blb/utils/exceptions/platform_exceptions.dart';
+import 'package:blb/utils/local_storage/storage_utility.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -13,7 +14,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:blb/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 
 
@@ -46,6 +46,10 @@ class AuthenticationRepository extends GetxController {
     final user = _auth.currentUser;
     if (user != null) {
       if (user.emailVerified) {
+
+        // Initialize User Specific Storage
+        await BLBLocalStorage.init(user.uid);
+
         Get.offAll(() => const NavigationMenu());
       } else {
         Get.offAll(() => VerifyEmailScreen(email: _auth.currentUser?.email));
@@ -201,7 +205,6 @@ class AuthenticationRepository extends GetxController {
   //[LogoutUser] - Valid for any Authentication.
   Future<void> logout() async {
     try {
-      await GoogleSignIn().signOut();
       await FirebaseAuth.instance.signOut();
       Get.offAll(() => const LoginScreen());
     } on FirebaseAuthException catch (e) {
