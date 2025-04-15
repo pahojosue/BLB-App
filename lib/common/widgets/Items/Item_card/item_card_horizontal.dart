@@ -5,20 +5,20 @@ import 'package:blb/common/widgets/images/blb_rounded_image.dart';
 import 'package:blb/features/blb_app/screens/home/screens/item_details/item_details.dart';
 import 'package:blb/features/personalisation/models/item_model.dart';
 import 'package:blb/utils/constants/colors.dart';
-import 'package:blb/utils/constants/image_strings.dart';
 import 'package:blb/utils/constants/sizes.dart';
 import 'package:blb/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BLBItemCardHorizontal extends StatelessWidget {
-  const BLBItemCardHorizontal({super.key});
+  const BLBItemCardHorizontal({super.key, required this.item});
 
+  final ItemModel item;
   @override
   Widget build(BuildContext context) {
     final dark = BLBHelperFunctions.isDarkMode(context);
     return GestureDetector(
-      onTap: () => Get.to(() => ItemDetails(item: ItemModel.empty())),
+      onTap: () => Get.to(() => ItemDetails(item: item)),
       child: Container(
         width: BLBHelperFunctions.screenWidth(),
         padding: const EdgeInsets.all(1),
@@ -38,7 +38,9 @@ class BLBItemCardHorizontal extends StatelessWidget {
                 height: 120,
                 width: 120,
                 child: BLBRoundedImage(
-                    imageUrl: BLBImages.appLogo, applyImageRadius: true),
+                    imageUrl: item.imageUrl,
+                    applyImageRadius: true,
+                    isNetworkImage: true),
               ),
             ),
 
@@ -51,15 +53,15 @@ class BLBItemCardHorizontal extends StatelessWidget {
             //Item details
             Padding(
               padding: EdgeInsets.only(top: BLBSizes.sm, left: BLBSizes.sm),
-              child: const Column(
+              child: Column(
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ItemTitleCard(title: "Good Logo to Buy"),
+                      ItemTitleCard(title: item.name),
                       SizedBox(height: BLBSizes.spaceBtwItems / 2),
                       Text(
-                        "500 XAF",
+                        "${item.price} XAF",
                         overflow: TextOverflow.ellipsis,
                       ),
                     ],

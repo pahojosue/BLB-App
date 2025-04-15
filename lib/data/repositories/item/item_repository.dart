@@ -81,7 +81,10 @@ class ItemRepository extends GetxController {
   //Get the Items from Firebase
   Future<List<ItemModel>> getItems() async {
     try {
-      final snapshot = await _db.collection('Items').get();
+      final snapshot = await _db
+          .collection('Items')
+          .where('borrowerID', isEqualTo: "")
+          .get();
       return snapshot.docs.map((e) => ItemModel.fromSnapshot(e)).toList();
     } on FirebaseException catch (e) {
       throw BLBFirebaseException(e.code).message;
@@ -126,6 +129,21 @@ class ItemRepository extends GetxController {
       throw BLBPlatformException(e.code).message;
     } catch (e) {
       throw 'Something went wrong. Please try again';
+    }
+  }
+
+  //Update a field of an Item depending on it's ID.
+  Future<void> updateSingleField(Map<String, dynamic> json, String id) async {
+    try {
+      await _db.collection("Items").doc(id).update(json);
+    } on FirebaseException catch (e) {
+      throw BLBFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const BLBFormatException();
+    } on PlatformException catch (e) {
+      throw BLBPlatformException(e.code).message;
+    } catch (e) {
+      throw "Something went wrong. Please try again";
     }
   }
 }

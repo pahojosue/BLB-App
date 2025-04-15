@@ -1,15 +1,28 @@
 import 'package:blb/common/widgets/Items/Item_card/item_card_horizontal.dart';
 import 'package:blb/common/widgets/appbar/appbar.dart';
 import 'package:blb/common/widgets/custom_shapes/containers/rounded_container.dart';
+import 'package:blb/features/blb_app/controllers/userView/user_view_controller.dart';
+import 'package:blb/features/personalisation/models/item_model.dart';
 import 'package:blb/utils/constants/sizes.dart';
 import 'package:blb/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Userview extends StatelessWidget {
-  const Userview({super.key});
+  const Userview({
+    super.key,
+    required this.ownerId,
+    required this.borrowerId,
+    required this.item,
+  });
+
+  final String ownerId;
+  final String borrowerId;
+  final ItemModel item;
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(UserViewController());
     return Scaffold(
       appBar: BLBAppBar(
         showBackArrow: true,
@@ -21,7 +34,7 @@ class Userview extends StatelessWidget {
           child: Column(
             children: [
               //Item
-              BLBItemCardHorizontal(),
+              BLBItemCardHorizontal(item: item),
               const SizedBox(height: BLBSizes.spaceBtwSections * 2),
 
               //User details
@@ -31,11 +44,31 @@ class Userview extends StatelessWidget {
                 padding: EdgeInsets.all(BLBSizes.defaultSpace),
                 child: Column(
                   children: [
-                    UserInfo(title: "Name: ", result: "John"),
+                    UserInfo(
+                      title: "Name: ",
+                      widget: FutureBuilder(
+                          future: controller.getBorrowerName(borrowerId),
+                          builder: (context, snapshot) {
+                            return Text(snapshot.data.toString());
+                          }),
+                    ),
                     const SizedBox(height: BLBSizes.spaceBtwInputFields),
-                    UserInfo(title: "Location: ", result: "Douala"),
+                    UserInfo(
+                        title: "Location: ",
+                        widget: FutureBuilder(
+                            future: controller.getBorrowerAddress(borrowerId),
+                            builder: (context, snapshot) {
+                              return Text(snapshot.data.toString());
+                            })),
                     const SizedBox(height: BLBSizes.spaceBtwInputFields),
-                    UserInfo(title: "Borrowing Period: ", result: "2"),
+                    Row(
+                      children: [
+                        Text("Borrowing Period: ",
+                            style: Theme.of(context).textTheme.titleLarge),
+                        SizedBox(width: BLBSizes.spaceBtwItems),
+                        Text("${item.lendingPeriod} day(s)"),
+                      ],
+                    ),
                   ],
                 ),
               ),
@@ -53,7 +86,10 @@ class Userview extends StatelessWidget {
                               text: "Reject",
                               onPressed: () {},
                               color: Colors.red),
-                          Buttons(text: "Accept", onPressed: () {})
+                          Buttons(
+                              text: "Accept",
+                              onPressed: () => controller.updateBorrowerId(
+                                  item.id, borrowerId))
                         ],
                       ),
                     ),
@@ -72,18 +108,18 @@ class UserInfo extends StatelessWidget {
   const UserInfo({
     super.key,
     required this.title,
-    required this.result,
+    required this.widget,
   });
 
   final String title;
-  final String result;
+  final Widget widget;
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Text(title, style: Theme.of(context).textTheme.titleLarge),
         SizedBox(width: BLBSizes.spaceBtwItems),
-        Text(result),
+        widget,
       ],
     );
   }
@@ -106,7 +142,7 @@ class Buttons extends StatelessWidget {
     return SizedBox(
         width: BLBSizes.defaultSpace * 10,
         child: ElevatedButton(
-            onPressed: () {},
+            onPressed: onPressed,
             style: ElevatedButton.styleFrom(
                 backgroundColor: color, side: BorderSide(color: color)),
             child: Text(
