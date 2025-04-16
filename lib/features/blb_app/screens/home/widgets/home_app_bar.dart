@@ -29,7 +29,8 @@ class BLBHomeAppBar extends StatelessWidget {
               key: controller.itemFormKey,
               child: TextFormField(
                 controller: controller.searchQuery,
-                decoration: const InputDecoration(labelText: "Search an item"),
+                decoration:
+                    const InputDecoration(labelText: "Search for an item"),
               ),
             ),
           ),

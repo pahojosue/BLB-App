@@ -1,17 +1,13 @@
-import 'package:blb/features/authentication/controllers/login/login_controller.dart';
-import 'package:blb/features/personalisation/controllers/user_controller.dart';
 import 'package:blb/utils/constants/colors.dart';
 import 'package:blb/utils/constants/image_strings.dart';
 import 'package:blb/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class BLBSocialButtons extends StatelessWidget {
   const BLBSocialButtons({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(UserController());
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -46,4 +42,3 @@ class BLBSocialButtons extends StatelessWidget {
     );
   }
 }
-

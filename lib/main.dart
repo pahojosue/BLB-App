@@ -1,6 +1,4 @@
 import 'package:blb/data/repositories/authentication/authentication_repository.dart';
-import 'package:blb/data/repositories/transaction_repository.dart';
-import 'package:blb/features/personalisation/controllers/transaction_controller.dart';
 import 'package:blb/features/personalisation/controllers/user_controller.dart';
 import 'package:blb/firebase_options.dart';
 import 'package:flutter/material.dart';
@@ -28,14 +26,6 @@ Future<void> main() async {
     (FirebaseApp value) => Get.put(AuthenticationRepository()),
   );
 
-
-  // Todo: Initialize Transaction Repository
-  final transactionRepository  =
-  TransactionRepository();
-
-  final transactionController =
-  TransactionController(transactionRepository);
-  
   // Todo: Register UserController
   Get.put(UserController());
 

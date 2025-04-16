@@ -1,8 +1,8 @@
 import 'package:blb/common/widgets/appbar/appbar.dart';
-import 'package:blb/features/authentication/screens/profile/change_name.dart';
-import 'package:blb/features/authentication/screens/profile/profile_menu.dart';
-import 'package:blb/features/authentication/screens/settings/blb_circular_images.dart';
-import 'package:blb/features/authentication/screens/settings/blb_section_heading.dart';
+import 'package:blb/features/blb_app/screens/profile/change_name.dart';
+import 'package:blb/features/blb_app/screens/profile/profile_menu.dart';
+import 'package:blb/features/blb_app/screens/settings/blb_circular_images.dart';
+import 'package:blb/features/blb_app/screens/settings/blb_section_heading.dart';
 import 'package:blb/features/personalisation/controllers/user_controller.dart';
 import 'package:blb/utils/constants/image_strings.dart';
 import 'package:blb/utils/constants/sizes.dart';

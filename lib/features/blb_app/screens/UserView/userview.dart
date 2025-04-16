@@ -1,4 +1,4 @@
-import 'package:blb/common/widgets/Items/Item_card/item_card_horizontal.dart';
+import 'package:blb/common/widgets/Items/Item_card/user_view_item_card_horizontal.dart';
 import 'package:blb/common/widgets/appbar/appbar.dart';
 import 'package:blb/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:blb/features/blb_app/controllers/userView/user_view_controller.dart';
@@ -34,7 +34,7 @@ class Userview extends StatelessWidget {
           child: Column(
             children: [
               //Item
-              BLBItemCardHorizontal(item: item),
+              BLBUserViewItemCardHorizontal(item: item),
               const SizedBox(height: BLBSizes.spaceBtwSections * 2),
 
               //User details

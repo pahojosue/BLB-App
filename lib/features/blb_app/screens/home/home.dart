@@ -36,8 +36,7 @@ class HomeScreen extends StatelessWidget {
                   Obx(() {
                     if (controller.isLoading.value) {
                       return Center(
-                        child: Text('Loading ...',
-                            style: Theme.of(context).textTheme.bodyMedium),
+                        child: CircularProgressIndicator(),
                       );
                     }
 
@@ -47,17 +46,19 @@ class HomeScreen extends StatelessWidget {
                             style: Theme.of(context).textTheme.bodyMedium),
                       );
                     }
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      padding: EdgeInsets.zero,
-                      itemCount: controller.items.length,
-                      scrollDirection: Axis.vertical,
-                      itemBuilder: (_, index) {
-                        return BLBItemCardVertical(
-                            item: controller.items[index]);
-                      },
-                    );
+                    return Column(children: [
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: EdgeInsets.zero,
+                        itemCount: controller.items.length,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (_, index) {
+                          return BLBItemCardVertical(
+                              item: controller.items[index]);
+                        },
+                      ),
+                    ]);
                   }),
                 ],
               ),

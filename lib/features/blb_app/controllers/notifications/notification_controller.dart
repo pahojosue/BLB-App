@@ -42,7 +42,8 @@ class NotificationController extends GetxController {
   }
 
   //Send Item Details
-  Future<void> sendNotificationDetails(String ownerId, ItemModel item) async {
+  Future<void> sendBorrowingNotificationDetails(
+      String ownerId, ItemModel item) async {
     try {
       //Start Loading
       BLBFullScreenLoader.openLoadingDialog(

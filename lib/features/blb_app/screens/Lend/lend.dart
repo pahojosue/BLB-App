@@ -43,15 +43,16 @@ class LendScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   //Image Picker
-                  BLBRoundedImage(
-                    imageUrl: controller.imageUrl != ''
-                        ? controller.imageUrl
-                        : BLBImages.user,
-                    height: 200,
-                    width: BLBHelperFunctions.screenWidth(),
-                    backgroundColor: Colors.black,
-                    isNetworkImage: controller.imageUrl == '' ? false : true,
-                  ),
+                  Obx(() {
+                    final networkImage = controller.imageUrl.value;
+                    final image =
+                        networkImage.isNotEmpty ? networkImage : BLBImages.user;
+                    return BLBRoundedImage(
+                      height: 200,
+                      width: BLBHelperFunctions.screenWidth(),
+                      imageUrl: image,
+                    );
+                  }),
                   const SizedBox(height: BLBSizes.spaceBtwItems),
                   //Imagepicker button
                   Row(

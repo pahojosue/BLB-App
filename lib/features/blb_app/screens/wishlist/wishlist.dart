@@ -1,59 +1,56 @@
 import 'package:blb/common/widgets/Items/Item_card/item_card_vertical.dart';
 import 'package:blb/common/widgets/appbar/appbar.dart';
-import 'package:blb/common/widgets/icons/blb_circular_icon.dart';
-import 'package:blb/features/authentication/controllers/favourites_controller.dart';
-import 'package:blb/features/blb_app/screens/home/home.dart';
+import 'package:blb/features/blb_app/controllers/favourites/favourites_controller.dart';
 import 'package:blb/features/personalisation/models/item_model.dart';
 import 'package:blb/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
-
 
 class FavouriteScreen extends StatelessWidget {
   const FavouriteScreen({super.key, required this.item});
   final ItemModel item;
 
-
   @override
   Widget build(BuildContext context) {
     final controller = FavouritesController.instance;
-    return Scaffold(
 
+    return Scaffold(
       appBar: BLBAppBar(
+        showBackArrow: true,
         title:
             Text("Wishlist", style: Theme.of(context).textTheme.headlineMedium),
-            actions: [
-              BLBCircularIcon(icon: Iconsax.add, onPressed: () => Get.to(const HomeScreen())),
-            ],
       ),
+      body: FutureBuilder<List<ItemModel>>(
+        future: controller.favoriteItems(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
-      // Body
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(BLBSizes.defaultSpace),
+          if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text('No items in your wishlist.'));
+          }
 
-          // Items Grid
-          child: FutureBuilder(
-            future: controller.favoriteItems(),
-            builder: (context, snapshot) {
+          final items = snapshot.data!;
 
-                return ListView.builder(
-                  itemCount: 6,
-                  itemBuilder: (context, index) {
-                   itemBuilder: (_, index) => BLBItemCardVertical(item: ItemModel.empty());
-                    
-                    
-                     }
-                  );
-                     }
-                   ),
-               ),
-                  
+          return Padding(
+            padding: const EdgeInsets.all(BLBSizes.defaultSpace),
+            child: GridView.builder(
+              itemCount: items.length,
+              shrinkWrap: true,
+              physics: const BouncingScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 24,
+                crossAxisSpacing: 24,
+                childAspectRatio: 0.49,
+              ),
+              itemBuilder: (context, index) {
+                return BLBItemCardVertical(item: items[index]);
+              },
             ),
-        );         
-            
-     }
-          
+          );
+        },
+      ),
+    );
+  }
 }
-

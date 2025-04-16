@@ -1,8 +1,7 @@
 import 'package:blb/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:blb/common/widgets/icons/favourite_icon.dart';
 import 'package:blb/common/widgets/images/blb_rounded_image.dart';
 import 'package:blb/features/blb_app/controllers/items/item_controller.dart';
-import 'package:blb/features/blb_app/screens/home/screens/item_details/item_details.dart';
+import 'package:blb/features/blb_app/screens/home/screens/item_details/item_details_receipt.dart';
 import 'package:blb/features/personalisation/models/item_model.dart';
 import 'package:blb/utils/constants/colors.dart';
 import 'package:blb/utils/constants/sizes.dart';
@@ -11,8 +10,8 @@ import 'package:blb/common/styles/shadows.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class BLBItemCardVertical extends StatelessWidget {
-  const BLBItemCardVertical({super.key, required this.item});
+class BLBLentItemCardVertical extends StatelessWidget {
+  const BLBLentItemCardVertical({super.key, required this.item});
   final ItemModel item;
 
   @override
@@ -20,7 +19,7 @@ class BLBItemCardVertical extends StatelessWidget {
     final controller = ItemController.instance;
     final dark = BLBHelperFunctions.isDarkMode(context);
     return GestureDetector(
-      onTap: () => Get.to(() => ItemDetails(item: item)),
+      onTap: () => Get.to(() => ItemDetailsReceipt()),
       child: Padding(
         padding: EdgeInsets.only(bottom: BLBSizes.spaceBtwItems),
         child: Container(
@@ -47,13 +46,6 @@ class BLBItemCardVertical extends StatelessWidget {
                           imageUrl: item.imageUrl,
                           applyImageRadius: true,
                           isNetworkImage: true),
-                    ),
-
-                    //Favorite Icon Button
-                    Positioned(
-                      top: 0,
-                      right: 0,
-                      child: BLBFavouriteIcon(itemId: item.id),
                     ),
                   ],
                 ),

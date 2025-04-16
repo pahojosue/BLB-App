@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:blb/data/repositories/authentication/authentication_repository.dart';
 import 'package:blb/data/repositories/user/user_repository.dart';
 import 'package:blb/features/authentication/screens/login/login.dart';
-import 'package:blb/features/authentication/screens/profile/re_authenticate_user_login_form.dart';
+import 'package:blb/features/blb_app/screens/profile/re_authenticate_user_login_form.dart';
 import 'package:blb/features/personalisation/models/user_model.dart';
 import 'package:blb/utils/constants/image_strings.dart';
 import 'package:blb/utils/constants/sizes.dart';

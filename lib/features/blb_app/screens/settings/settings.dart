@@ -1,10 +1,10 @@
 import 'package:blb/common/widgets/appbar/appbar.dart';
 import 'package:blb/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:blb/data/repositories/authentication/authentication_repository.dart';
-import 'package:blb/features/authentication/screens/profile/profile.dart';
-import 'package:blb/features/authentication/screens/settings/layouts/blb_settings_menu_tile.dart';
-import 'package:blb/features/authentication/screens/settings/layouts/list_tiles/user_profile_tile.dart';
-import 'package:blb/features/authentication/screens/settings/blb_section_heading.dart';
+import 'package:blb/features/blb_app/screens/profile/profile.dart';
+import 'package:blb/features/blb_app/screens/settings/layouts/blb_settings_menu_tile.dart';
+import 'package:blb/features/blb_app/screens/settings/layouts/list_tiles/user_profile_tile.dart';
+import 'package:blb/features/blb_app/screens/settings/blb_section_heading.dart';
 import 'package:blb/utils/constants/colors.dart';
 import 'package:blb/utils/constants/sizes.dart';
 import 'package:blb/utils/constants/text_strings.dart';

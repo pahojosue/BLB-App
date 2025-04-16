@@ -1,6 +1,5 @@
-import 'package:blb/features/authentication/screens/settings/settings.dart';
+import 'package:blb/features/blb_app/screens/settings/settings.dart';
 import 'package:blb/features/blb_app/screens/Lend/lend.dart';
-import 'package:blb/features/blb_app/screens/categories/categories.dart';
 import 'package:blb/features/blb_app/screens/home/home.dart';
 import 'package:blb/features/blb_app/screens/myitems/myitems.dart';
 import 'package:blb/utils/constants/colors.dart';
@@ -32,10 +31,10 @@ class NavigationMenu extends StatelessWidget {
               : BLBColors.black.withValues(alpha: 0.1),
           destinations: const [
             NavigationDestination(icon: Icon(Iconsax.home), label: 'Home'),
-            NavigationDestination(
-              icon: Icon(Icons.density_medium_rounded),
-              label: "Categories",
-            ),
+            // NavigationDestination(
+            //   icon: Icon(Icons.density_medium_rounded),
+            //   label: "Categories",
+            // ),
             NavigationDestination(
                 icon: Icon(Iconsax.add_circle), label: 'Lend'),
             NavigationDestination(icon: Icon(Iconsax.box), label: 'My Items'),
@@ -54,7 +53,7 @@ class NavigationController extends GetxController {
 
   final screens = [
     const HomeScreen(),
-    const CategoriesScreen(),
+    // const CategoriesScreen(),
     const LendScreen(),
     const MyitemsScreen(),
     const SettingsScreen(),

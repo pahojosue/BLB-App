@@ -11,8 +11,8 @@ import 'package:blb/common/styles/shadows.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class BLBItemCardVertical extends StatelessWidget {
-  const BLBItemCardVertical({super.key, required this.item});
+class BLBBorrowedItemCardVertical extends StatelessWidget {
+  const BLBBorrowedItemCardVertical({super.key, required this.item});
   final ItemModel item;
 
   @override
@@ -48,13 +48,6 @@ class BLBItemCardVertical extends StatelessWidget {
                           applyImageRadius: true,
                           isNetworkImage: true),
                     ),
-
-                    //Favorite Icon Button
-                    Positioned(
-                      top: 0,
-                      right: 0,
-                      child: BLBFavouriteIcon(itemId: item.id),
-                    ),
                   ],
                 ),
               ),
@@ -74,42 +67,42 @@ class BLBItemCardVertical extends StatelessWidget {
                       textAlign: TextAlign.left,
                     ),
                     SizedBox(height: BLBSizes.spaceBtwItems / 2),
-                    Row(
-                      children: [
-                        // Text(name,
-                        //     overflow: TextOverflow.ellipsis,
-                        //     maxLines: 1,
-                        //     style: Theme.of(context).textTheme.labelLarge),
-                        FutureBuilder(
-                            future: controller.getLenderName(item.ownerId),
-                            builder: (context, snapshot) {
-                              return Text(snapshot.data.toString());
-                            }),
-                        const SizedBox(width: BLBSizes.xs),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        //Price
-                        Text(
-                          "${item.price} XAF",
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.headlineMedium,
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: BLBColors.dark,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(6),
-                              bottomRight:
-                                  Radius.circular(BLBSizes.productImageRadius),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
+                    // Row(
+                    //   children: [
+                    //     // Text(name,
+                    //     //     overflow: TextOverflow.ellipsis,
+                    //     //     maxLines: 1,
+                    //     //     style: Theme.of(context).textTheme.labelLarge),
+                    //     FutureBuilder(
+                    //         future: controller.getLenderName(item.ownerId),
+                    //         builder: (context, snapshot) {
+                    //           return Text(snapshot.data.toString());
+                    //         }),
+                    //     const SizedBox(width: BLBSizes.xs),
+                    //   ],
+                    // ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     //Price
+                    //     Text(
+                    //       "${item.price} XAF",
+                    //       maxLines: 1,
+                    //       overflow: TextOverflow.ellipsis,
+                    //       style: Theme.of(context).textTheme.headlineMedium,
+                    //     ),
+                    //     Container(
+                    //       decoration: BoxDecoration(
+                    //         color: BLBColors.dark,
+                    //         borderRadius: BorderRadius.only(
+                    //           topLeft: Radius.circular(6),
+                    //           bottomRight:
+                    //               Radius.circular(BLBSizes.productImageRadius),
+                    //         ),
+                    //       ),
+                    //     )
+                    //   ],
+                    // ),
                   ],
                 ),
               ),

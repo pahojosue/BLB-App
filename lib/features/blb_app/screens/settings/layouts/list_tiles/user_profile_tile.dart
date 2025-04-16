@@ -1,5 +1,5 @@
-import 'package:blb/features/authentication/screens/profile/profile.dart';
-import 'package:blb/features/authentication/screens/settings/blb_circular_images.dart';
+import 'package:blb/features/blb_app/screens/profile/profile.dart';
+import 'package:blb/features/blb_app/screens/settings/blb_circular_images.dart';
 import 'package:blb/features/personalisation/controllers/user_controller.dart';
 import 'package:blb/utils/constants/colors.dart';
 import 'package:blb/utils/constants/image_strings.dart';

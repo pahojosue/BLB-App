@@ -1,9 +1,12 @@
 import 'package:blb/common/widgets/Items/Item_card/blb_search_container.dart';
+import 'package:blb/common/widgets/Items/Item_card/borrowed_item_card_vertical.dart';
+import 'package:blb/common/widgets/Items/Item_card/item_card_vertical.dart';
 import 'package:blb/common/widgets/Items/Item_card/search_container_view_model.dart';
 import 'package:blb/common/widgets/Items/item_card_receipt.dart';
 import 'package:blb/common/widgets/appbar/appbar.dart';
 import 'package:blb/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:blb/features/authentication/controllers/onboarding/onboarding_controller.dart';
+import 'package:blb/features/blb_app/controllers/items/item_controller.dart';
 import 'package:blb/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,7 +16,8 @@ class BorrowedItemsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(OnboardingController());
+    final controller = Get.put(ItemController());
+    controller.fetchBorrowedItems();
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -46,10 +50,11 @@ class BorrowedItemsScreen extends StatelessWidget {
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     padding: EdgeInsets.zero,
-                    itemCount: 6,
+                    itemCount: controller.itemsBorrowed.length,
                     scrollDirection: Axis.vertical,
                     itemBuilder: (_, index) {
-                      return BLBItemCardReceipt();
+                      return BLBBorrowedItemCardVertical(
+                          item: controller.itemsBorrowed[index]);
                     },
                   ),
                 ],

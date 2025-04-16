@@ -26,10 +26,7 @@ class NotificationsScreen extends StatelessWidget {
             children: [
               Obx(() {
                 if (notifController.isLoading.value) {
-                  return Center(
-                    child: Text('Loading ...',
-                        style: Theme.of(context).textTheme.bodyMedium),
-                  );
+                  return Center(child: CircularProgressIndicator());
                 }
 
                 if (notifController.notifications.isEmpty) {

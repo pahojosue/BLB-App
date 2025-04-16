@@ -36,12 +36,16 @@ class ItemDetails extends StatelessWidget {
     } else {
       return Scaffold(
         bottomNavigationBar: user.uid == item.ownerId
-            ? Text("This is your Item")
+            ? Container(
+                height: 20,
+                alignment: Alignment.center,
+                child: Text("This is your Item"),
+              )
             : Padding(
                 padding: EdgeInsets.only(left: 48, right: 48, bottom: 12),
                 child: ElevatedButton(
-                  onPressed: () => notifController.sendNotificationDetails(
-                      item.ownerId, item),
+                  onPressed: () => notifController
+                      .sendBorrowingNotificationDetails(item.ownerId, item),
                   style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.all(BLBSizes.md),
                       backgroundColor: BLBColors.primary,

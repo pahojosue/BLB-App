@@ -95,13 +95,49 @@ class ItemRepository extends GetxController {
     }
   }
 
+  Future<List<ItemModel>> getLentItems(String currentUserId) async {
+    try {
+      final snapshot = await _db
+          .collection('Items')
+          .where('ownerID', isEqualTo: currentUserId)
+          .get();
+      return snapshot.docs.map((e) => ItemModel.fromSnapshot(e)).toList();
+    } on FirebaseException catch (e) {
+      throw BLBFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw BLBPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
+
+  //Get the Items from Firebase
+  Future<List<ItemModel>> getBorrowedItems(String currentUserId) async {
+    try {
+      final snapshot = await _db
+          .collection('Items')
+          .where('borrowerID', isEqualTo: currentUserId)
+          .get();
+      return snapshot.docs.map((e) => ItemModel.fromSnapshot(e)).toList();
+    } on FirebaseException catch (e) {
+      throw BLBFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw BLBPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
+
   //Get Items based on the Query
   Future<List<ItemModel>> getFavouriteItems(List<String> itemIds) async {
     try {
       final snapshot = await _db
           .collection('Items')
-          .where(FieldPath.documentId,whereIn: itemIds).get();
-      return snapshot.docs.map((querySnapshot) => ItemModel.fromSnapshot(querySnapshot)).toList();
+          .where(FieldPath.documentId, whereIn: itemIds)
+          .get();
+      return snapshot.docs
+          .map((querySnapshot) => ItemModel.fromSnapshot(querySnapshot))
+          .toList();
     } on FirebaseException catch (e) {
       throw BLBFirebaseException(e.code).message;
     } on PlatformException catch (e) {

@@ -20,7 +20,7 @@ class ItemController extends GetxController {
   final isNetworkImage = false.obs;
   final name = TextEditingController();
   final description = TextEditingController();
-  String imageUrl = "";
+  Rx<String> imageUrl = "".obs;
   final price = TextEditingController();
   String state = "";
   final lendingPeriod = TextEditingController();
@@ -31,6 +31,8 @@ class ItemController extends GetxController {
   GlobalKey<FormState> itemFormKey = GlobalKey<FormState>();
 
   RxList<ItemModel> items = <ItemModel>[].obs;
+  RxList<ItemModel> itemsBorrowed = <ItemModel>[].obs;
+  RxList<ItemModel> itemsLent = <ItemModel>[].obs;
   final isLoading = false.obs;
   final itemRepository = Get.put(ItemRepository());
   final userRepository = UserRepository.instance;
@@ -52,7 +54,7 @@ class ItemController extends GetxController {
       //Assign Items
       items.assignAll(itemsFetched);
     } catch (e) {
-      BLBLoaders.errorSnackBar(title: 'Ob Snap', message: e.toString());
+      BLBLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
     } finally {
       isLoading.value = false;
     }
@@ -80,12 +82,48 @@ class ItemController extends GetxController {
     }
   }
 
+  void fetchBorrowedItems() async {
+    try {
+      //Show loader while loading the items
+      isLoading.value = true;
+
+      //Fetch items
+      final itemsFetched =
+          await itemRepository.getBorrowedItems(_auth.currentUser!.uid);
+
+      //Assign Items
+      itemsBorrowed.assignAll(itemsFetched);
+    } catch (e) {
+      BLBLoaders.errorSnackBar(title: 'Ob Snap', message: e.toString());
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  void fetchLentItems() async {
+    try {
+      //Show loader while loading the items
+      isLoading.value = true;
+
+      //Fetch items
+      final itemsFetched =
+          await itemRepository.getLentItems(_auth.currentUser!.uid);
+
+      //Assign Items
+      itemsLent.assignAll(itemsFetched);
+    } catch (e) {
+      BLBLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
   void cleanScreen() {
     canBeBartered.value = true;
     isNetworkImage.value = false;
     name.clear();
     description.clear();
-    imageUrl = "";
+    imageUrl = "".obs;
     price.clear();
     state = "";
     lendingPeriod.clear();
@@ -99,7 +137,7 @@ class ItemController extends GetxController {
   }
 
   void setImageUrl(String image) {
-    imageUrl = image;
+    imageUrl.value = image;
   }
 
   //Send Item Details
@@ -129,7 +167,7 @@ class ItemController extends GetxController {
         id: '',
         name: name.text.trim(),
         description: description.text.trim(),
-        imageUrl: imageUrl,
+        imageUrl: imageUrl.value,
         price: price.text.trim(),
         state: state,
         lendingPeriod: lendingPeriod.text.trim(),
